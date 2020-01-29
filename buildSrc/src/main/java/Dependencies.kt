@@ -9,9 +9,11 @@ object App {
 
 }
 
-
 object Versions {
 
     val kotlin = "1.3.50"
+    val material = "1.2.0-alpha04"
+    val appCompat = "1.1.0"
+    val constraintLayout = "1.1.3"
 
 }
