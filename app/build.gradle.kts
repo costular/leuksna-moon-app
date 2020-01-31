@@ -28,9 +28,11 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}")
 
     implementation("androidx.appcompat:appcompat:${Versions.appCompat}")
     implementation("androidx.core:core-ktx:1.1.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}")
     implementation("androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}")
     implementation("com.google.android.material:material:${Versions.material}")
 

@@ -1,7 +1,8 @@
-package com.costular.leuksna_moon_phases
+package com.costular.leuksna_moon_phases.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.costular.leuksna_moon_phases.R
 
 class MainActivity : AppCompatActivity() {
 

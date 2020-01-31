@@ -12,8 +12,11 @@ object App {
 object Versions {
 
     val kotlin = "1.3.50"
+    val coroutines = "1.3.3"
+
     val material = "1.2.0-alpha04"
     val appCompat = "1.1.0"
     val constraintLayout = "1.1.3"
+    val lifecycle = "2.2.0"
 
 }
