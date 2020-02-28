@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Leuksna Moon Phases</string>
+
+    <!-- Main -->
+    <string name="main_moonrise">Moonrise</string>
+    <string name="main_moonset">Moonset</string>
+    <string name="main_distance">Distance</string>
+    <string name="main_altitude">Altitude</string>
+    <string name="main_luminosity">Luminosity</string>
+    <string name="main_zodiac">Zodiac</string>
 </resources>

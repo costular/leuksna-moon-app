@@ -31,10 +31,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}")
 
     implementation("androidx.appcompat:appcompat:${Versions.appCompat}")
-    implementation("androidx.core:core-ktx:1.1.0")
+    implementation("androidx.core:core-ktx:1.2.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}")
     implementation("androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}")
     implementation("com.google.android.material:material:${Versions.material}")
+    implementation("androidx.navigation:navigation-fragment-ktx:${Versions.navigation}")
+    implementation("androidx.navigation:navigation-ui-ktx:${Versions.navigation}")
+    implementation("devs.mulham.horizontalcalendar:horizontalcalendar:${Versions.horizontalCalendar}")
 
     testImplementation("junit:junit:4.12")
     androidTestImplementation("androidx.test.ext:junit:1.1.1")
