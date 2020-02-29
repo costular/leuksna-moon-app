@@ -25,6 +25,10 @@ android {
     }
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}")
@@ -38,8 +42,20 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:${Versions.navigation}")
     implementation("androidx.navigation:navigation-ui-ktx:${Versions.navigation}")
     implementation("devs.mulham.horizontalcalendar:horizontalcalendar:${Versions.horizontalCalendar}")
+    implementation("org.koin:koin-androidx-viewmodel:${Versions.koin}")
+    implementation("org.koin:koin-androidx-fragment:${Versions.koin}")
+    implementation("io.uniflow:uniflow-android:${Versions.uniflow}")
+    implementation("com.jakewharton.threetenabp:threetenabp:${Versions.threeTen}")
 
     testImplementation("junit:junit:4.12")
+    testImplementation("org.koin:koin-test:${Versions.koin}")
+    testImplementation("io.uniflow:uniflow-android-test:${Versions.uniflow}")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}")
+    testImplementation("io.mockk:mockk:${Versions.mockk}")
+    testImplementation("io.kotlintest:kotlintest:${Versions.kotlintest}")
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
+    testImplementation("org.threeten:threetenbp:1.3.2")
+
     androidTestImplementation("androidx.test.ext:junit:1.1.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
 }
