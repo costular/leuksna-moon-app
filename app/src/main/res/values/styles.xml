@@ -12,4 +12,22 @@
         <item name="rippleColor">?colorOnPrimary</item>
     </style>
 
+    <style name="Widget.MoonPhase" parent="TextAppearance.Headline3">
+        <item name="fontFamily">@font/lato_bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="maxLines">1</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMinTextSize">34sp</item>
+        <item name="autoSizeMaxTextSize">48sp</item>
+    </style>
+
+    <style name="Widget.CurrentDate" parent="TextAppearance.Headline6">
+        <item name="fontFamily">@font/lato</item>
+    </style>
+
+    <style name="Icon">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+    </style>
+
 </resources>
