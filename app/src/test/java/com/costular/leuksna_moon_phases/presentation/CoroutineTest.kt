@@ -3,7 +3,6 @@ package com.costular.leuksna_moon_phases.presentation
 import androidx.arch.core.executor.ArchTaskExecutor
 import androidx.arch.core.executor.TaskExecutor
 import com.costular.leuksna_moon_phases.TestCoroutineDispatchers
-import com.costular.leuksna_moon_phases.util.net.TestDispatcherFactory
 import io.kotlintest.TestCase
 import io.kotlintest.TestResult
 import io.kotlintest.specs.StringSpec
@@ -20,8 +19,6 @@ import kotlinx.coroutines.test.setMain
 abstract class CoroutineTest(
     protected val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
 ) : StringSpec() {
-
-    val testDispatcherProvider = TestDispatcherFactory(testDispatcher)
 
     override fun beforeTest(testCase: TestCase) {
         super.beforeTest(testCase)

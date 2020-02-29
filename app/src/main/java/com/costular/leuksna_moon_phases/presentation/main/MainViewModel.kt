@@ -1,29 +1,28 @@
 package com.costular.leuksna_moon_phases.presentation.main
 
 import com.costular.leuksna_moon_phases.domain.model.MoonInfoRequest
-import com.costular.leuksna_moon_phases.presentation.BaseViewModel
-import com.costular.leuksna_moon_phases.util.net.DispatcherFactory
+import io.uniflow.android.flow.AndroidDataFlow
+import io.uniflow.core.flow.UIState
 import org.threeten.bp.LocalDate
 
 class MainViewModel(
-    dispatcherFactory: DispatcherFactory,
     private val mainInteractor: MainInteractor
-) : BaseViewModel(dispatcherFactory) {
+) : AndroidDataFlow() {
 
-    fun getMoonInfo(localDate: LocalDate, latitude: Double?, longitude: Double?) = launchOnIO {
-        val moonInfo = mainInteractor.getMoonInfo(
-            MoonInfoRequest(
-                localDate,
-                latitude,
-                longitude
+    fun getMoonInfo(localDate: LocalDate, latitude: Double?, longitude: Double?) =
+        setState({
+            val moonInfo = mainInteractor.getMoonInfo(
+                MoonInfoRequest(
+                    localDate,
+                    latitude,
+                    longitude
+                )
             )
-        )
-        setState {
-            MainViewState.Success(
+
+            MainViewState(
                 date = localDate,
                 moonInfo = moonInfo
             )
-        }
-    }
+        }, { error -> UIState.Failed(error = error) })
 
 }

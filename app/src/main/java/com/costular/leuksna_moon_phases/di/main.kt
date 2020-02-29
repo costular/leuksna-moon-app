@@ -18,6 +18,6 @@ val main = module {
     }
 
     viewModel {
-        MainViewModel(get(), get())
+        MainViewModel(get())
     }
 }

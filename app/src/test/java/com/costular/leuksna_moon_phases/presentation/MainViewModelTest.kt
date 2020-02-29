@@ -28,7 +28,7 @@ class MainViewModelTest : CoroutineTest() {
 
     override fun beforeTest(testCase: TestCase) {
         super.beforeTest(testCase)
-        mainViewModel = MainViewModel(testDispatcherProvider, mainInteractor)
+        mainViewModel = MainViewModel(mainInteractor)
         view = mainViewModel.mockObservers()
     }
 
@@ -50,7 +50,7 @@ class MainViewModelTest : CoroutineTest() {
                 mainViewModel.getMoonInfo(localDate, null, null)
 
                 // Then
-                val expected = MainViewState.Success(
+                val expected = MainViewState(
                     localDate,
                     moonInfo
                 )
