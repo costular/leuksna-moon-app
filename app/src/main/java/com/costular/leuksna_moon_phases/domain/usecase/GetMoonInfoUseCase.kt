@@ -1,14 +1,13 @@
-package com.costular.leuksna_moon_phases.domain.interactor
+package com.costular.leuksna_moon_phases.domain.usecase
 
 import com.costular.leuksna_moon_phases.domain.MoonRepository
 import com.costular.leuksna_moon_phases.domain.model.MoonInfo
 import com.costular.leuksna_moon_phases.domain.model.MoonInfoRequest
-import kotlinx.coroutines.CoroutineDispatcher
 import org.threeten.bp.LocalDate
 
-class GetMoonInfoInteractor(
+class GetMoonInfoUseCase(
     private val moonRepository: MoonRepository
-) : Interactor<GetMoonInfoInteractor.Params, MoonInfo>() {
+) : UseCase<GetMoonInfoUseCase.Params, MoonInfo>() {
 
     data class Params(
         val date: LocalDate,

@@ -1,6 +1,6 @@
-package com.costular.leuksna_moon_phases.domain.interactor
+package com.costular.leuksna_moon_phases.domain.usecase
 
-abstract class Interactor<in M, out T> {
+abstract class UseCase<in M, out T> {
 
     suspend fun execute(input: M): T {
         return doWork(input)

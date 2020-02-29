@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Leuksna Moon Phases</string>
 
+    <!-- Moon phases -->
+    <string name="new_moon">New Moon</string>
+    <string name="waxing_crescent">Waxing Crescent</string>
+    <string name="first_quarter">First Quarter</string>
+    <string name="waxing_gibbous">Waxing Gibbous</string>
+    <string name="full_moon">Full Moon</string>
+    <string name="waning_gibbous">Wanning Gibbous</string>
+    <string name="last_quarter">Last Quarter</string>
+    <string name="waning_crescent">Waning Crescent</string>
+    
     <!-- Main -->
     <string name="main_moonrise">Moonrise</string>
     <string name="main_moonset">Moonset</string>
@@ -8,4 +18,5 @@
     <string name="main_altitude">Altitude</string>
     <string name="main_luminosity">Luminosity</string>
     <string name="main_zodiac">Zodiac</string>
+    
 </resources>
