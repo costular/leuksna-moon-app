@@ -25,4 +25,8 @@ class MainViewModel(
             )
         }, { error -> UIState.Failed(error = error) })
 
+    fun selectDate(newDate: LocalDate) {
+        getMoonInfo(newDate, null, null)
+    }
+
 }

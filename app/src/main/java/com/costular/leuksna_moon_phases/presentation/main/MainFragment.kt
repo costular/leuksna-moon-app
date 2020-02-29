@@ -5,6 +5,11 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.costular.leuksna_moon_phases.R
 import com.costular.leuksna_moon_phases.util.MoonPhaseFormatter
+import com.costular.leuksna_moon_phases.util.toCalendar
+import com.costular.leuksna_moon_phases.util.toLocalDate
+import devs.mulham.horizontalcalendar.HorizontalCalendar
+import devs.mulham.horizontalcalendar.HorizontalCalendarView
+import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import io.uniflow.android.flow.onStates
 import io.uniflow.core.flow.UIState
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -13,6 +18,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.FormatStyle
+import java.util.*
+
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -29,7 +36,27 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             }
         }
 
+        generateCalendar()
         mainViewModel.getMoonInfo(LocalDate.now(), null, null)
+    }
+
+    private fun generateCalendar() {
+        val start = LocalDate.now().minusMonths(1).toCalendar()
+        val end = LocalDate.now().plusMonths(1).toCalendar()
+
+        HorizontalCalendar.Builder(view, R.id.horizontalCalendar)
+            .range(start, end)
+            .datesNumberOnScreen(5)
+            .build()
+            .apply {
+                calendarListener = object : HorizontalCalendarListener() {
+                    override fun onDateSelected(date: Calendar?, position: Int) {
+                        date?.let { date ->
+                            mainViewModel.selectDate(date.time.toLocalDate())
+                        }
+                    }
+                }
+            }
     }
 
     private fun handleState(state: MainViewState) = with(state) {
