@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:starsView_bigStarThreshold="10dp"
-        app:starsView_maxStarSize="6dp"
+        app:starsView_maxStarSize="4dp"
         app:starsView_meteoritesColors="@array/meteorite_colors"
         app:starsView_meteoritesEnabled="true"
         app:starsView_meteoritesInterval="5000"
