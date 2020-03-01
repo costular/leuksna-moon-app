@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.costular.leuksna_moon_phases.R
 import com.costular.leuksna_moon_phases.util.MoonPhaseFormatter
+import com.costular.leuksna_moon_phases.util.ZodiacFormatter
 import com.costular.leuksna_moon_phases.util.toCalendar
 import com.costular.leuksna_moon_phases.util.toLocalDate
 import devs.mulham.horizontalcalendar.HorizontalCalendar
@@ -25,6 +26,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val mainViewModel: MainViewModel by viewModel()
     private val moonPhaseFormatter: MoonPhaseFormatter by inject()
+    private val zodiacFormatter: ZodiacFormatter by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -85,6 +87,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         imageMoon.setImageResource(moonPhaseFormatter.formatDrawableId(moonInfo.moonPhase))
         textCurrentDate.text = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
         textMoonPhase.text = moonPhaseFormatter.formatName(moonInfo.moonPhase)
+
+        keyValueAltitude.value = "${moonInfo.altitude}km"
+        keyValueDistance.value = "${moonInfo.distance}km"
+        keyValueZodiac.value = zodiacFormatter.format(moonInfo.zodiac)
+        keyValueLuminosity.value = "${moonInfo.fraction}%"
     }
 
     private fun handleError(throwable: Throwable?) {

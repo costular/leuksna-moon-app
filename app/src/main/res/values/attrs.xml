@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="KeyValueView">
+        <attr name="kv_key" format="string|reference" />
+        <attr name="kv_value" format="string|reference" />
+    </declare-styleable>
+
+</resources>
