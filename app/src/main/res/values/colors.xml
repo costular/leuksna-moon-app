@@ -4,4 +4,13 @@
     <color name="colorPrimaryDark">#cbc26d</color>
     <color name="colorAccent">#fff59d</color>
     <color name="colorOnPrimary">#000000</color>
+
+    <array name="star_colors">
+        <item>@android:color/white</item>
+    </array>
+
+    <array name="meteorite_colors">
+        <item>@color/colorPrimary</item>
+    </array>
+
 </resources>

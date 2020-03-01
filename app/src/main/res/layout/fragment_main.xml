@@ -1,137 +1,166 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textMoonPhase"
-        style="@style/Widget.MoonPhase"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/layout_horizontal_keyline"
-        android:layout_marginTop="@dimen/layout_vertical_keyline"
-        android:layout_marginEnd="@dimen/layout_horizontal_keyline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Full moon" />
-
-    <TextView
-        android:id="@+id/textCurrentDate"
-        style="@style/Widget.CurrentDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/layout_horizontal_keyline"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="@dimen/layout_horizontal_keyline"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textMoonPhase" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="147dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textCurrentDate" />
-
-    <TextView
-        android:id="@+id/textMoonriseTime"
-        style="@style/TextAppearance.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:text="9 PM" />
-
-    <TextView
-        android:id="@+id/textView3"
-        style="@style/TextAppearance.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/main_moonrise"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-    <TextView
-        android:id="@+id/textView5"
-        style="@style/TextAppearance.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="@string/main_moonset"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textMoonSetTime"
-        style="@style/TextAppearance.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="7 AM"
-        app:layout_constraintEnd_toEndOf="@+id/textView5"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <devs.mulham.horizontalcalendar.HorizontalCalendarView
-        android:id="@+id/horizontalCalendar"
+    <com.sofakingforever.stars.AnimatedStarsView
+        android:id="@+id/viewSky"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:background="?colorSurface"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:textColorSelected="?colorPrimary" />
+        android:layout_height="match_parent"
+        app:starsView_bigStarThreshold="10dp"
+        app:starsView_meteoritesColors="@array/meteorite_colors"
+        app:starsView_meteoritesEnabled="true"
+        app:starsView_meteoritesInterval="2000"
+        app:starsView_maxStarSize="6dp"
+        app:starsView_minStarSize="1dp"
+        app:starsView_starColors="@array/star_colors"
+        app:starsView_starCount="50" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        style="@style/Icon"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textMoonriseTime"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3"
-        app:srcCompat="@drawable/ic_moonrise" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        style="@style/Icon"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textMoonSetTime"
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/textView5"
-        app:srcCompat="@drawable/ic_moonset" />
+        <TextView
+            android:id="@+id/textMoonPhase"
+            style="@style/Widget.MoonPhase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_horizontal_keyline"
+            android:layout_marginTop="@dimen/layout_vertical_keyline"
+            android:layout_marginEnd="@dimen/layout_horizontal_keyline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Full moon" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button"
-        style="@style/Widget.MenuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_settings" />
+        <TextView
+            android:id="@+id/textCurrentDate"
+            style="@style/Widget.CurrentDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_horizontal_keyline"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="@dimen/layout_horizontal_keyline"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textMoonPhase" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button2"
-        style="@style/Widget.MenuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
-        app:srcCompat="@drawable/ic_calendar" />
+        <FrameLayout
+            android:id="@+id/viewMoon"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCurrentDate">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/imageMoon"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_art_full_moon"/>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/textMoonriseTime"
+            style="@style/TextAppearance.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView3"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            tools:text="9 PM" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/TextAppearance.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/main_moonrise"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewMoon" />
+
+        <TextView
+            android:id="@+id/textView5"
+            style="@style/TextAppearance.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@string/main_moonset"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/textMoonSetTime"
+            style="@style/TextAppearance.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="7 AM"
+            app:layout_constraintEnd_toEndOf="@+id/textView5"
+            app:layout_constraintStart_toStartOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <devs.mulham.horizontalcalendar.HorizontalCalendarView
+            android:id="@+id/horizontalCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="?colorSurface"
+            app:layout_constraintBottom_toTopOf="@+id/button2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:textColorSelected="?colorPrimary" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            style="@style/Icon"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textMoonriseTime"
+            app:layout_constraintStart_toEndOf="@+id/textView3"
+            app:layout_constraintTop_toTopOf="@+id/textView3"
+            app:srcCompat="@drawable/ic_moonrise" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            style="@style/Icon"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textMoonSetTime"
+            app:layout_constraintEnd_toStartOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="@+id/textView5"
+            app:srcCompat="@drawable/ic_moonset" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button"
+            style="@style/Widget.MenuButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_settings" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button2"
+            style="@style/Widget.MenuButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:srcCompat="@drawable/ic_calendar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

@@ -46,6 +46,7 @@ dependencies {
     implementation("org.koin:koin-androidx-fragment:${Versions.koin}")
     implementation("io.uniflow:uniflow-android:${Versions.uniflow}")
     implementation("com.jakewharton.threetenabp:threetenabp:${Versions.threeTen}")
+    implementation("com.sofakingforever.libraries:animated-stars-android:1.1.4@aar")
 
     testImplementation("junit:junit:4.12")
     testImplementation("org.koin:koin-test:${Versions.koin}")

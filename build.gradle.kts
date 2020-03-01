@@ -18,7 +18,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven(url="https://dl.bintray.com/arrow-kt/arrow-kt/")
+        maven(url="http://dl.bintray.com/sofakingforever/libraries")
     }
 }
 

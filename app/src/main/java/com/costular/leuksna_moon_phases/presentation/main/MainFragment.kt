@@ -3,12 +3,12 @@ package com.costular.leuksna_moon_phases.presentation.main
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.costular.leuksna_moon_phases.R
 import com.costular.leuksna_moon_phases.util.MoonPhaseFormatter
 import com.costular.leuksna_moon_phases.util.toCalendar
 import com.costular.leuksna_moon_phases.util.toLocalDate
 import devs.mulham.horizontalcalendar.HorizontalCalendar
-import devs.mulham.horizontalcalendar.HorizontalCalendarView
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import io.uniflow.android.flow.onStates
 import io.uniflow.core.flow.UIState
@@ -38,6 +38,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         generateCalendar()
         mainViewModel.getMoonInfo(LocalDate.now(), null, null)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewSky.onStart()
+    }
+
+    override fun onStop() {
+        viewSky.onStop()
+        super.onStop()
     }
 
     private fun generateCalendar() {
@@ -72,8 +82,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             )
         )
 
+        imageMoon.setImageResource(moonPhaseFormatter.formatDrawableId(moonInfo.moonPhase))
         textCurrentDate.text = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
-        textMoonPhase.text = moonPhaseFormatter.format(moonInfo.moonPhase)
+        textMoonPhase.text = moonPhaseFormatter.formatName(moonInfo.moonPhase)
     }
 
     private fun handleError(throwable: Throwable?) {
