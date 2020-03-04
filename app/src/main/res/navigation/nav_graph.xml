@@ -7,4 +7,10 @@
         android:id="@+id/mainFragment"
         android:name="com.costular.leuksna_moon_phases.presentation.main.MainFragment"
         android:label="MainFragment" />
+
+    <dialog
+        android:id="@+id/calendarFragment"
+        android:name="com.costular.leuksna_moon_phases.presentation.calendar.CalendarFragment"
+        android:label="CalendarFragment" />
+
 </navigation>

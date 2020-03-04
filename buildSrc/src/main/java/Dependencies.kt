@@ -26,5 +26,6 @@ object Versions {
     val mockk = "1.9.3"
 
     val kotlintest = "2.0.7"
+    val calendarView = "0.3.2"
 
 }

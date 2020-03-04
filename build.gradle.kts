@@ -19,6 +19,7 @@ allprojects {
         google()
         jcenter()
         maven(url="http://dl.bintray.com/sofakingforever/libraries")
+        maven(url="https://jitpack.io")
     }
 }
 

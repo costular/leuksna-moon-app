@@ -47,6 +47,7 @@ dependencies {
     implementation("io.uniflow:uniflow-android:${Versions.uniflow}")
     implementation("com.jakewharton.threetenabp:threetenabp:${Versions.threeTen}")
     implementation("com.sofakingforever.libraries:animated-stars-android:1.1.4@aar")
+    implementation("com.github.kizitonwose:CalendarView:${Versions.calendarView}")
 
     testImplementation("junit:junit:4.12")
     testImplementation("org.koin:koin-test:${Versions.koin}")

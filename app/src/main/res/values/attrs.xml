@@ -5,4 +5,13 @@
         <attr name="kv_value" format="string|reference" />
     </declare-styleable>
 
+    <declare-styleable name="ProgressTextView">
+        <attr name="pt_progress" format="integer|reference" />
+        <attr name="pt_progressColor" format="color|reference" />
+        <attr name="pt_progressWidth" format="dimension|reference" />
+        <attr name="pt_textColor" format="color|reference" />
+        <attr name="pt_backgroundColor" format="color|reference" />
+        <attr name="pt_textSize" format="dimension|reference" />
+    </declare-styleable>
+
 </resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.costular.leuksna_moon_phases.presentation.view.ProgressTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/textProgressDay"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:layout_margin="5dp"
+    app:pt_progressWidth="2dp"
+    app:pt_textColor="?colorOnSurface"
+    app:pt_textSize="16sp" />

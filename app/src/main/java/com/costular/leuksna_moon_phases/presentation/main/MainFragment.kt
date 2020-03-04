@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.costular.leuksna_moon_phases.R
 import com.costular.leuksna_moon_phases.util.MoonPhaseFormatter
 import com.costular.leuksna_moon_phases.util.ZodiacFormatter
@@ -11,10 +12,12 @@ import com.costular.leuksna_moon_phases.util.toCalendar
 import com.costular.leuksna_moon_phases.util.toLocalDate
 import devs.mulham.horizontalcalendar.HorizontalCalendar
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
+import io.uniflow.android.flow.onEvents
 import io.uniflow.android.flow.onStates
 import io.uniflow.core.flow.UIState
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
@@ -24,7 +27,7 @@ import java.util.*
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private val mainViewModel: MainViewModel by viewModel()
+    private val mainViewModel: MainViewModel by sharedViewModel()
     private val moonPhaseFormatter: MoonPhaseFormatter by inject()
     private val zodiacFormatter: ZodiacFormatter by inject()
 
@@ -37,9 +40,21 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 is UIState.Failed -> handleError(state.error)
             }
         }
+        onEvents(mainViewModel) { event ->
+            when (val data = event.take()) {
+                is MainEvents.OpenCalendar -> openCalendar()
+                is MainEvents.OpenSettings -> openSettings()
+            }
+        }
 
+        bindActions()
         generateCalendar()
         mainViewModel.getMoonInfo(LocalDate.now(), null, null)
+    }
+
+    private fun bindActions() {
+        buttonCalendar.setOnClickListener { mainViewModel.openCalendar() }
+        buttonSettings.setOnClickListener { mainViewModel.openSettings() }
     }
 
     override fun onStart() {
@@ -97,5 +112,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun handleError(throwable: Throwable?) {
 
     }
+
+    private fun openCalendar() {
+        findNavController().navigate(R.id.calendarFragment)
+    }
+
+    private fun openSettings() {
+
+    }
+
 
 }

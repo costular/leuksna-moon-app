@@ -2,6 +2,7 @@ package com.costular.leuksna_moon_phases.presentation.main
 
 import com.costular.leuksna_moon_phases.domain.model.MoonInfoRequest
 import io.uniflow.android.flow.AndroidDataFlow
+import io.uniflow.core.flow.UIEvent
 import io.uniflow.core.flow.UIState
 import org.threeten.bp.LocalDate
 
@@ -27,6 +28,14 @@ class MainViewModel(
 
     fun selectDate(newDate: LocalDate) {
         getMoonInfo(newDate, null, null)
+    }
+
+    fun openCalendar() = setState {
+        sendEvent(MainEvents.OpenCalendar)
+    }
+
+    fun openSettings() = setState {
+        sendEvent(MainEvents.OpenSettings)
     }
 
 }
