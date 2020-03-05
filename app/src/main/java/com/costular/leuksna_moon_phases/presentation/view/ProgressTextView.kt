@@ -179,15 +179,10 @@ class ProgressTextView @JvmOverloads constructor(
                 result = result.coerceAtMost(specSize)
             }
         }
-        if (result < desiredSize) {
-            Log.e("ChartView", "The view is too small, the content might get cut")
-        }
         return result
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        Log.v("Chart onMeasure w", MeasureSpec.toString(widthMeasureSpec))
-        Log.v("Chart onMeasure h", MeasureSpec.toString(heightMeasureSpec))
         val desiredWidth = suggestedMinimumWidth + paddingLeft + paddingRight
         val desiredHeight = suggestedMinimumHeight + paddingTop + paddingBottom
         setMeasuredDimension(
