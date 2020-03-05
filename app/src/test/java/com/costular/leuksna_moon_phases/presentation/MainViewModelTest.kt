@@ -2,6 +2,8 @@ package com.costular.leuksna_moon_phases.presentation
 
 import com.costular.leuksna_moon_phases.domain.model.MoonInfo
 import com.costular.leuksna_moon_phases.domain.model.MoonPhase
+import com.costular.leuksna_moon_phases.domain.model.Zodiac
+import com.costular.leuksna_moon_phases.presentation.main.MainEvents
 import com.costular.leuksna_moon_phases.presentation.main.MainInteractor
 import com.costular.leuksna_moon_phases.presentation.main.MainViewModel
 import com.costular.leuksna_moon_phases.presentation.main.MainViewState
@@ -39,7 +41,10 @@ class MainViewModelTest : CoroutineTest() {
                 val moonInfo = MoonInfo(
                     LocalDate.of(2020, 2, 28),
                     MoonPhase.FULL_MOON,
-                    1f,
+                    100,
+                    100.0,
+                    100.0,
+                    Zodiac.GEMINI,
                     LocalDateTime.now(),
                     LocalDateTime.now().plusHours(3).plusMinutes(24)
                 )
@@ -61,6 +66,29 @@ class MainViewModelTest : CoroutineTest() {
             }
         }
 
+        "When click on calendar then should navigate to calendar screen" {
+            // Given
+
+            // When
+            mainViewModel.openCalendar()
+
+            // Then
+            verifySequence {
+                view.hasEvent(MainEvents.OpenCalendar)
+            }
+        }
+
+        "When click on settings then should navigate to settings screen" {
+            // Given
+
+            // When
+            mainViewModel.openSettings()
+
+            // Then
+            verifySequence {
+                view.hasEvent(MainEvents.OpenSettings)
+            }
+        }
     }
 
 }

@@ -7,12 +7,6 @@ class CalendarViewModel : AndroidDataFlow() {
 
     private var selectedDate: LocalDate = LocalDate.now()
 
-    init {
-        setState {
-            CalendarState(selectedDate)
-        }
-    }
-
     fun selectDate(newDate: LocalDate) = setState {
         selectedDate = newDate
         CalendarState(newDate)

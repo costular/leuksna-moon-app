@@ -47,6 +47,8 @@ class CalendarFragment : RoundedBottomSheetFragment() {
                 is CalendarState -> handleState(state)
             }
         }
+
+        calendarViewModel.selectDate(selectedDate)
     }
 
     private fun handleState(state: CalendarState) {
