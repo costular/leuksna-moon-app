@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.ColorUtils
 import com.costular.leuksna_moon_phases.R
 import com.costular.leuksna_moon_phases.util.dp
 import com.costular.leuksna_moon_phases.util.readAttrColor
@@ -122,8 +123,27 @@ class ProgressTextView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         calculate()
+
+        if (isEnabled) {
+            with (textPaint) {
+                color = textColor
+            }
+            with (progressPaint) {
+                color = progressColor
+            }
+        } else {
+            with (textPaint) {
+                val disabledColor = ColorUtils.setAlphaComponent(textColor, DISABLED_ALPHA)
+                color = disabledColor
+            }
+            with (progressPaint) {
+                val disabledColor = ColorUtils.setAlphaComponent(progressColor, DISABLED_ALPHA)
+                color = disabledColor
+            }
+        }
+
         drawText(canvas)
-        drawProgressBackground(canvas)
+        if (isEnabled) drawProgressBackground(canvas)
         drawProgress(canvas)
     }
 
@@ -182,6 +202,7 @@ class ProgressTextView @JvmOverloads constructor(
         private val DEFAULT_TEXT_SIZE = 16.dp.toFloat()
         private const val DEFAULT_PROGRESS = 0
         private val DEFAULT_WIDTH = 2.dp
+        private const val DISABLED_ALPHA = 38
     }
 
 }

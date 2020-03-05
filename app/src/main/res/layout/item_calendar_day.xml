@@ -7,4 +7,5 @@
     android:layout_margin="5dp"
     app:pt_progressWidth="2dp"
     app:pt_textColor="?colorOnSurface"
-    app:pt_textSize="16sp" />
+    app:pt_textSize="16sp"
+    android:background="@drawable/state_bg_calendar_day"/>

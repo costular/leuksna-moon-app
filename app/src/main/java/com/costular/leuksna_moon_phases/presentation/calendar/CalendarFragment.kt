@@ -9,8 +9,12 @@ import com.costular.leuksna_moon_phases.presentation.main.MainViewModel
 import com.costular.leuksna_moon_phases.presentation.view.RoundedBottomSheetFragment
 import com.kizitonwose.calendarview.utils.next
 import com.kizitonwose.calendarview.utils.previous
+import com.kizitonwose.calendarview.utils.yearMonth
+import io.uniflow.android.flow.onStates
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.WeekFields
@@ -19,8 +23,11 @@ import java.util.*
 class CalendarFragment : RoundedBottomSheetFragment() {
 
     private val mainViewModel: MainViewModel by sharedViewModel()
+    private val calendarViewModel: CalendarViewModel by viewModel()
 
     private val monthFormatter = DateTimeFormatter.ofPattern("MMMM")
+
+    private var selectedDate: LocalDate = LocalDate.now()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +41,16 @@ class CalendarFragment : RoundedBottomSheetFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindActions()
         initCalendar()
+
+        onStates(calendarViewModel) { state ->
+            when (state) {
+                is CalendarState -> handleState(state)
+            }
+        }
+    }
+
+    private fun handleState(state: CalendarState) {
+        printCalendar(state.selectedDate)
     }
 
     private fun bindActions() {
@@ -47,11 +64,17 @@ class CalendarFragment : RoundedBottomSheetFragment() {
                 calendar.smoothScrollToMonth(it.yearMonth.next)
             }
         }
+        textHeader.setOnClickListener {
+            calendar.smoothScrollToMonth(YearMonth.now())
+        }
     }
 
     private fun initCalendar() {
         with(calendar) {
-            dayBinder = CalendarDayBinder()
+            dayBinder = CalendarDayBinder(selectedDate) { date ->
+                mainViewModel.selectDate(date)
+                calendarViewModel.selectDate(date)
+            }
             val current = YearMonth.now()
             val firstDayOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek
             setup(current.minusMonths(12), current.plusMonths(12), firstDayOfWeek)
@@ -61,6 +84,16 @@ class CalendarFragment : RoundedBottomSheetFragment() {
                 textHeader.text = "${month.yearMonth.format(monthFormatter)} ${month.year}"
             }
         }
+    }
+
+    private fun printCalendar(selectedDate: LocalDate) {
+        val oldDate = this.selectedDate
+        this.selectedDate = selectedDate
+
+        (calendar.dayBinder as CalendarDayBinder).selectedDate = selectedDate
+
+        calendar.notifyDateChanged(oldDate)
+        calendar.notifyDateChanged(selectedDate)
     }
 
 }

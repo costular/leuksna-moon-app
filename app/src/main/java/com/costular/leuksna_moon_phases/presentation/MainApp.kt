@@ -2,6 +2,7 @@ package com.costular.leuksna_moon_phases.presentation
 
 import android.app.Application
 import com.costular.leuksna_moon_phases.di.app
+import com.costular.leuksna_moon_phases.di.calendar
 import com.costular.leuksna_moon_phases.di.data
 import com.costular.leuksna_moon_phases.di.main
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -24,7 +25,8 @@ class MainApp : Application() {
             modules(listOf(
                 app,
                 data,
-                main
+                main,
+                calendar
             ))
         }
     }
