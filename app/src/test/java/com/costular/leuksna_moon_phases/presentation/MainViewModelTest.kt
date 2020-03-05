@@ -68,13 +68,15 @@ class MainViewModelTest : CoroutineTest() {
 
         "When click on calendar then should navigate to calendar screen" {
             // Given
+            val selectedDate = LocalDate.now().plusDays(3)
 
             // When
+            mainViewModel.selectDate(selectedDate)
             mainViewModel.openCalendar()
 
             // Then
             verifySequence {
-                view.hasEvent(MainEvents.OpenCalendar)
+                view.hasEvent(MainEvents.OpenCalendar(selectedDate))
             }
         }
 

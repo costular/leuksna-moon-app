@@ -6,11 +6,19 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.costular.leuksna_moon_phases.presentation.main.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
 
     <dialog
         android:id="@+id/calendarFragment"
         android:name="com.costular.leuksna_moon_phases.presentation.calendar.CalendarFragment"
-        android:label="CalendarFragment" />
+        android:label="CalendarFragment" >
+        <argument
+            android:name="selected_date"
+            app:argType="string" />
+    </dialog>
 
 </navigation>

@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.costular.leuksna_moon_phases.R
+import com.costular.leuksna_moon_phases.presentation.calendar.CalendarFragmentArgs
 import com.costular.leuksna_moon_phases.util.MoonPhaseFormatter
 import com.costular.leuksna_moon_phases.util.ZodiacFormatter
 import com.costular.leuksna_moon_phases.util.toCalendar
 import com.costular.leuksna_moon_phases.util.toLocalDate
 import devs.mulham.horizontalcalendar.HorizontalCalendar
+import devs.mulham.horizontalcalendar.model.HorizontalCalendarConfig
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import io.uniflow.android.flow.onEvents
 import io.uniflow.android.flow.onStates
@@ -31,6 +33,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private val moonPhaseFormatter: MoonPhaseFormatter by inject()
     private val zodiacFormatter: ZodiacFormatter by inject()
 
+    private lateinit var horizontalCalendarConfig: HorizontalCalendar
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -42,7 +46,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
         onEvents(mainViewModel) { event ->
             when (val data = event.take()) {
-                is MainEvents.OpenCalendar -> openCalendar()
+                is MainEvents.OpenCalendar -> openCalendar(data.selectedDate)
                 is MainEvents.OpenSettings -> openSettings()
             }
         }
@@ -71,7 +75,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         val start = LocalDate.now().minusMonths(1).toCalendar()
         val end = LocalDate.now().plusMonths(1).toCalendar()
 
-        HorizontalCalendar.Builder(view, R.id.horizontalCalendar)
+        horizontalCalendarConfig = HorizontalCalendar.Builder(view, R.id.horizontalCalendar)
             .range(start, end)
             .datesNumberOnScreen(5)
             .build()
@@ -107,14 +111,19 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         keyValueDistance.value = "${moonInfo.distance}km"
         keyValueZodiac.value = zodiacFormatter.format(moonInfo.zodiac)
         keyValueLuminosity.value = "${moonInfo.fraction}%"
+
+        if (state.date != horizontalCalendarConfig.selectedDate.time.toLocalDate()) {
+            horizontalCalendarConfig.selectDate(state.date.toCalendar(), false)
+        }
     }
 
     private fun handleError(throwable: Throwable?) {
 
     }
 
-    private fun openCalendar() {
-        findNavController().navigate(R.id.calendarFragment)
+    private fun openCalendar(selectedDate: LocalDate) {
+        val action = MainFragmentDirections.actionMainFragmentToCalendarFragment(selectedDate.toString())
+        findNavController().navigate(action)
     }
 
     private fun openSettings() {

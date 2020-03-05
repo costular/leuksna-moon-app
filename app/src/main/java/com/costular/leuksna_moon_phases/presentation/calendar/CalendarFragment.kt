@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.costular.leuksna_moon_phases.R
 import com.costular.leuksna_moon_phases.presentation.main.MainViewModel
 import com.costular.leuksna_moon_phases.presentation.view.RoundedBottomSheetFragment
@@ -22,12 +23,14 @@ import java.util.*
 
 class CalendarFragment : RoundedBottomSheetFragment() {
 
+    val args: CalendarFragmentArgs by navArgs()
+
     private val mainViewModel: MainViewModel by sharedViewModel()
     private val calendarViewModel: CalendarViewModel by viewModel()
 
     private val monthFormatter = DateTimeFormatter.ofPattern("MMMM")
 
-    private var selectedDate: LocalDate = LocalDate.now()
+    private lateinit var selectedDate: LocalDate
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +42,7 @@ class CalendarFragment : RoundedBottomSheetFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        readArgs()
         bindActions()
         initCalendar()
 
@@ -49,6 +53,10 @@ class CalendarFragment : RoundedBottomSheetFragment() {
         }
 
         calendarViewModel.selectDate(selectedDate)
+    }
+
+    private fun readArgs() {
+        selectedDate = LocalDate.parse(args.selectedDate)
     }
 
     private fun handleState(state: CalendarState) {

@@ -5,6 +5,7 @@ import com.costular.leuksna_moon_phases.presentation.calendar.CalendarState
 import io.uniflow.android.flow.AndroidDataFlow
 import io.uniflow.core.flow.UIEvent
 import io.uniflow.core.flow.UIState
+import io.uniflow.core.flow.getStateAs
 import org.threeten.bp.LocalDate
 
 class MainViewModel(
@@ -32,7 +33,8 @@ class MainViewModel(
     }
 
     fun openCalendar() = setState {
-        sendEvent(MainEvents.OpenCalendar)
+        val selectedDate = getStateAs<MainViewState>().date
+        sendEvent(MainEvents.OpenCalendar(selectedDate))
     }
 
     fun openSettings() = setState {
