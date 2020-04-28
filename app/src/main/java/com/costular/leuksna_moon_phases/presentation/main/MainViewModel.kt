@@ -2,34 +2,52 @@ package com.costular.leuksna_moon_phases.presentation.main
 
 import com.costular.leuksna_moon_phases.domain.model.MoonInfoRequest
 import com.costular.leuksna_moon_phases.presentation.calendar.CalendarState
+import com.costular.leuksna_moon_phases.presentation.settings.SettingsHelper
 import io.uniflow.android.flow.AndroidDataFlow
 import io.uniflow.core.flow.UIEvent
 import io.uniflow.core.flow.UIState
+import io.uniflow.core.flow.fromState
 import io.uniflow.core.flow.getStateAs
+import kotlinx.coroutines.flow.onEach
 import org.threeten.bp.LocalDate
 
 class MainViewModel(
-    private val mainInteractor: MainInteractor
+    private val mainInteractor: MainInteractor,
+    settingsHelper: SettingsHelper
 ) : AndroidDataFlow() {
 
-    fun getMoonInfo(localDate: LocalDate, latitude: Double?, longitude: Double?) =
-        setState({
-            val moonInfo = mainInteractor.getMoonInfo(
-                MoonInfoRequest(
-                    localDate,
-                    latitude,
-                    longitude
-                )
-            )
+    init {
+        setState {
+            MainViewState()
+        }
 
-            MainViewState(
-                date = localDate,
-                moonInfo = moonInfo
+        settingsHelper.observeShowStarsBackground().onEach { showStars ->
+            fromState<MainViewState> { state ->
+                state.copy(showStarsBackground = showStars)
+            }
+        }
+        settingsHelper.observeLocation().onEach { location ->
+            // TODO
+        }
+    }
+
+    fun getMoonInfo(localDate: LocalDate) = fromState<MainViewState> { state ->
+        val moonInfo = mainInteractor.getMoonInfo(
+            MoonInfoRequest(
+                localDate,
+                null,
+                null // TODO get this from location
             )
-        }, { error -> UIState.Failed(error = error) })
+        )
+
+        state.copy(
+            date = localDate,
+            moonInfo = moonInfo
+        )
+    }
 
     fun selectDate(newDate: LocalDate) {
-        getMoonInfo(newDate, null, null)
+        getMoonInfo(newDate)
     }
 
     fun openCalendar() = setState {

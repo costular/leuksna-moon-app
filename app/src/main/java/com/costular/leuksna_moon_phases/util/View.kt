@@ -7,6 +7,13 @@ import android.util.TypedValue
 import android.view.View
 import androidx.annotation.AttrRes
 
+fun View.gone() {
+    visibility = View.GONE
+}
+
+fun View.visible() {
+    visibility = View.VISIBLE
+}
 
 fun TypedArray.readRecycling(block: TypedArray.() -> Unit) {
     block()

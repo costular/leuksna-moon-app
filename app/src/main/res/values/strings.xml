@@ -33,4 +33,21 @@
     <string name="main_luminosity">Luminosity</string>
     <string name="main_zodiac">Zodiac</string>
     
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="settings_general">General</string>
+    <string name="settings_general_unit">Unit of measure</string>
+    <string name="settings_general_unit_km">km</string>
+    <string name="settings_general_unit_mi">mi</string>
+    <string name="settings_general_show_stars_background">Show stars background</string>
+
+    <string name="settings_location">Location</string>
+    <string name="settings_no_location">No location</string>
+    <string name="settings_location_set_location">Set location</string>
+    
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_notifications_full_moon">Notify when full moon</string>
+    <string name="settings_notifications_new_moon">Notify when new moon</string>
+
+
 </resources>

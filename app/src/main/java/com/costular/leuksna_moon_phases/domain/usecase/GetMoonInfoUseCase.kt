@@ -3,6 +3,7 @@ package com.costular.leuksna_moon_phases.domain.usecase
 import com.costular.leuksna_moon_phases.domain.MoonRepository
 import com.costular.leuksna_moon_phases.domain.model.MoonInfo
 import com.costular.leuksna_moon_phases.domain.model.MoonInfoRequest
+import com.costular.leuksna_moon_phases.domain.model.mapper.MoonInfoMapper
 import org.threeten.bp.LocalDate
 
 class GetMoonInfoUseCase(

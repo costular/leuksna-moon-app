@@ -53,7 +53,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         bindActions()
         generateCalendar()
-        mainViewModel.getMoonInfo(LocalDate.now(), null, null)
+        mainViewModel.getMoonInfo(LocalDate.now())
     }
 
     private fun bindActions() {
@@ -91,29 +91,37 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun handleState(state: MainViewState) = with(state) {
-        textMoonriseTime.text = moonInfo.moonRise.format(
-            DateTimeFormatter.ofLocalizedTime(
-                FormatStyle.SHORT
+        moonInfo?.let { moonInfo ->
+            textMoonriseTime.text = moonInfo.moonRise.format(
+                DateTimeFormatter.ofLocalizedTime(
+                    FormatStyle.SHORT
+                )
             )
-        )
 
-        textMoonSetTime.text = moonInfo.moonSet.format(
-            DateTimeFormatter.ofLocalizedTime(
-                FormatStyle.SHORT
+            textMoonSetTime.text = moonInfo.moonSet.format(
+                DateTimeFormatter.ofLocalizedTime(
+                    FormatStyle.SHORT
+                )
             )
-        )
 
-        imageMoon.setImageResource(moonPhaseFormatter.formatDrawableId(moonInfo.moonPhase))
-        textCurrentDate.text = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
-        textMoonPhase.text = moonPhaseFormatter.formatName(moonInfo.moonPhase)
+            imageMoon.setImageResource(moonPhaseFormatter.formatDrawableId(moonInfo.moonPhase))
+            textCurrentDate.text = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
+            textMoonPhase.text = moonPhaseFormatter.formatName(moonInfo.moonPhase)
 
-        keyValueAltitude.value = "${moonInfo.altitude}km"
-        keyValueDistance.value = "${moonInfo.distance}km"
-        keyValueZodiac.value = zodiacFormatter.format(moonInfo.zodiac)
-        keyValueLuminosity.value = "${moonInfo.fraction}%"
+            keyValueAltitude.value = moonInfo.altitude
+            keyValueDistance.value = moonInfo.distance
+            keyValueZodiac.value = zodiacFormatter.format(moonInfo.zodiac)
+            keyValueLuminosity.value = moonInfo.fraction
+        }
 
         if (state.date != horizontalCalendarConfig.selectedDate.time.toLocalDate()) {
             horizontalCalendarConfig.selectDate(state.date.toCalendar(), false)
+        }
+
+        if (state.showStarsBackground) {
+            viewSky.onStart()
+        } else {
+            viewSky.onStart()
         }
     }
 
@@ -127,7 +135,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun openSettings() {
-
+        val action = MainFragmentDirections.actionMainFragmentToSettingsFragment()
+        findNavController().navigate(action)
     }
 
 

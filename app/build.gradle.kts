@@ -56,6 +56,7 @@ dependencies {
     implementation("com.jakewharton.threetenabp:threetenabp:${Versions.threeTen}")
     implementation("com.sofakingforever.libraries:animated-stars-android:1.1.4@aar")
     implementation("com.github.kizitonwose:CalendarView:${Versions.calendarView}")
+    implementation("com.github.tfcporciuncula:flow-preferences:${Versions.flowPreferences}")
 
     testImplementation("junit:junit:4.12")
     testImplementation("org.koin:koin-test:${Versions.koin}")
@@ -66,6 +67,10 @@ dependencies {
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
     testImplementation("org.threeten:threetenbp:1.3.2")
 
+    debugImplementation("androidx.fragment:fragment-testing:${Versions.fragment}")
+
     androidTestImplementation("androidx.test.ext:junit:1.1.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso:${Versions.kaspresso}")
+    androidTestImplementation("androidx.navigation:navigation-testing:${Versions.navigation}")
 }

@@ -10,6 +10,9 @@
         <action
             android:id="@+id/action_mainFragment_to_calendarFragment"
             app:destination="@id/calendarFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <dialog
@@ -20,5 +23,9 @@
             android:name="selected_date"
             app:argType="string" />
     </dialog>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.costular.leuksna_moon_phases.presentation.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 
 </navigation>

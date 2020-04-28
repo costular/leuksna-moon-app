@@ -31,9 +31,9 @@ class GetMoonInfoUseCaseTest : CoroutineTest() {
             val expected = MoonInfo(
                 LocalDate.now(),
                 MoonPhase.NEW_MOON,
-                0,
-                2420.0,
-                3828383.0,
+                "0%",
+                "2420.0",
+                "3828383.0",
                 Zodiac.PISCES,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusHours(4)

@@ -112,4 +112,17 @@
         <item name="android:navigationBarColor">?colorSurface</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="android:background">?colorSurface</item>
+    </style>
+
+    <style name="AppTheme.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">?colorSurface</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Headline6</item>
+    </style>
+
+    <style name="AppTheme.PopUpOverlay" parent="Widget.MaterialComponents.PopupMenu">
+
+    </style>
+
 </resources>

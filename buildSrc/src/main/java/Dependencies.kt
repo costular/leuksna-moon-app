@@ -19,6 +19,7 @@ object Versions {
     val appCompat = "1.1.0"
     val constraintLayout = "1.1.3"
     val lifecycle = "2.2.0"
+    val fragment = "1.3.0-alpha01"
     val navigation = "2.3.0-alpha02"
     val horizontalCalendar = "1.3.4"
     val uniflow = "0.9.5"
@@ -27,5 +28,7 @@ object Versions {
 
     val kotlintest = "2.0.7"
     val calendarView = "0.3.2"
+    val flowPreferences = "1.1.0"
+    val kaspresso = "1.1.0"
 
 }
