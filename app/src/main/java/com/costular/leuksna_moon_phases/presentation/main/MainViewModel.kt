@@ -17,15 +17,12 @@ class MainViewModel(
 ) : AndroidDataFlow() {
 
     init {
-        setState {
-            MainViewState()
-        }
-
-        settingsHelper.observeShowStarsBackground().onEach { showStars ->
-            fromState<MainViewState> { state ->
-                state.copy(showStarsBackground = showStars)
+        action {
+            setState {
+                MainViewState()
             }
         }
+
         settingsHelper.observeLocation().onEach { location ->
             // TODO
         }

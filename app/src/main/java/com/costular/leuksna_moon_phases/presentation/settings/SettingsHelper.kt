@@ -12,15 +12,12 @@ import kotlinx.coroutines.flow.Flow
 
 interface SettingsHelper {
 
-    fun getShowStarsBackground(): Boolean
     fun getMeasureUnit(): MeasureUnit
     fun getLocation(): Location
 
-    fun observeShowStarsBackground(): Flow<Boolean>
     fun observeMeasureUnit(): Flow<MeasureUnit>
     fun observeLocation(): Flow<Location>
     
-    suspend fun setShowStarsBackgroundEnabled(isEnabled: Boolean)
     suspend fun setMeasureUnit(measureUnit: MeasureUnit)
     suspend fun setLocation(location: Location)
 
@@ -34,11 +31,6 @@ class SettingsHelperImpl(
     private val sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     private val flowSharedPreferences = FlowSharedPreferences(sharedPreferences)
 
-    override fun getShowStarsBackground(): Boolean =
-        flowSharedPreferences.getBoolean(
-            PREF_STARS_BACKGROUND, defaultValue = DEFAULT_SHOW_STARS_BACKGROUND
-        ).get()
-
     override fun getMeasureUnit(): MeasureUnit =
         flowSharedPreferences.getEnum(
             PREF_MEASURE_UNIT,
@@ -48,11 +40,6 @@ class SettingsHelperImpl(
     override fun getLocation(): Location =
         flowSharedPreferences.getObject(PREF_LOCATION, LocationSerializer, Location.NotSet).get()
 
-    override fun observeShowStarsBackground(): Flow<Boolean> =
-        flowSharedPreferences.getBoolean(
-            PREF_STARS_BACKGROUND, defaultValue = DEFAULT_SHOW_STARS_BACKGROUND
-        ).asFlow()
-
     override fun observeMeasureUnit(): Flow<MeasureUnit> =
         flowSharedPreferences.getEnum(
             PREF_MEASURE_UNIT,
@@ -61,12 +48,6 @@ class SettingsHelperImpl(
 
     override fun observeLocation(): Flow<Location> =
         flowSharedPreferences.getObject(PREF_LOCATION, LocationSerializer, Location.NotSet).asFlow()
-
-    override suspend fun setShowStarsBackgroundEnabled(isEnabled: Boolean) {
-        flowSharedPreferences.getBoolean(
-            PREF_STARS_BACKGROUND, defaultValue = DEFAULT_SHOW_STARS_BACKGROUND
-        ).setAndCommit(isEnabled)
-    }
 
     override suspend fun setMeasureUnit(measureUnit: MeasureUnit) {
         flowSharedPreferences.getEnum(
@@ -82,10 +63,8 @@ class SettingsHelperImpl(
 
     companion object {
         private const val PREFS_NAME = "leuksna"
-        private const val PREF_STARS_BACKGROUND = "stars_background"
         private const val PREF_MEASURE_UNIT = "measure_unit"
         private const val PREF_LOCATION = "location"
 
-        const val DEFAULT_SHOW_STARS_BACKGROUND = true
     }
 }

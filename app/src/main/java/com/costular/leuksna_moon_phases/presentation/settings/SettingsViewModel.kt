@@ -11,17 +11,10 @@ class SettingsViewModel(
 ) : AndroidDataFlow() {
 
     init {
-        settingsHelper.observeShowStarsBackground()
-            .onEach { load() }
         settingsHelper.observeLocation()
             .onEach { load() }
         settingsHelper.observeMeasureUnit()
             .onEach { load() }
-    }
-
-    fun setShowStarsEnabled(isEnabled: Boolean) = setState {
-        settingsHelper.setShowStarsBackgroundEnabled(isEnabled)
-        getStateAs<SettingsState>().copy(showStarsBackgroundEnabled = isEnabled)
     }
 
     fun setMeasureUnit(measureUnit: MeasureUnit) = setState {
@@ -35,10 +28,9 @@ class SettingsViewModel(
     }
 
     fun load() = setState {
-        val showStars = settingsHelper.getShowStarsBackground()
         val measureUnit = settingsHelper.getMeasureUnit()
         val location = settingsHelper.getLocation()
-        SettingsState(measureUnit, showStars, location)
+        SettingsState(measureUnit, location)
     }
 
 }

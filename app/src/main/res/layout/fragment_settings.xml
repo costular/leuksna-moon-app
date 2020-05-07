@@ -94,29 +94,6 @@
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <TextView
-            android:id="@+id/textView4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/settings_general_show_stars_background"
-            android:textAppearance="@style/TextAppearance.Body1"
-            app:layout_constraintBottom_toBottomOf="@+id/switchShowStars"
-            app:layout_constraintEnd_toStartOf="@+id/switchShowStars"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/switchShowStars" />
-
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switchShowStars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:checked="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toggleUnit" />
-
-        <TextView
             android:id="@+id/textView6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -127,7 +104,7 @@
             android:textAppearance="@style/TextAppearance.Subtitle2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/switchShowStars" />
+            app:layout_constraintTop_toBottomOf="@+id/toggleUnit" />
 
         <TextView
             android:id="@+id/textLocation"

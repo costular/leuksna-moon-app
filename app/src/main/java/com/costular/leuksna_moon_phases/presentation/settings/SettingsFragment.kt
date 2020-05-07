@@ -48,13 +48,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             }
             settingsViewModel.setMeasureUnit(unit)
         }
-        switchShowStars.setOnCheckedChangeListener { _, isChecked ->
-            settingsViewModel.setShowStarsEnabled(isChecked)
-        }
     }
 
     private fun handleState(state: SettingsState) {
-        switchShowStars.isChecked = state.showStarsBackgroundEnabled
         when (state.measureUnit) {
             MeasureUnit.KM -> toggleUnit.check(R.id.buttonKm)
             MeasureUnit.MI -> toggleUnit.check(R.id.buttonMi)

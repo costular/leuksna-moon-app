@@ -32,11 +32,9 @@ class SettingsViewModelTest : CoroutineTest() {
             // Given
             val expected = SettingsState(
                 MeasureUnit.KM,
-                true,
                 Location.Set(10.0, 17.0)
             )
 
-            every { settingsHelper.getShowStarsBackground() } returns true
             every { settingsHelper.getMeasureUnit() } returns MeasureUnit.KM
             every { settingsHelper.getLocation() } returns Location.Set(10.0, 17.0)
 

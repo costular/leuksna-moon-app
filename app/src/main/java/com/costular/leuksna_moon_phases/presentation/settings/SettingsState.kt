@@ -6,6 +6,5 @@ import io.uniflow.core.flow.UIState
 
 data class SettingsState(
     val measureUnit: MeasureUnit = MeasureUnit.KM,
-    val showStarsBackgroundEnabled: Boolean = true,
     val location: Location = Location.NotSet
 ): UIState()
