@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.5.3")
+        classpath("com.android.tools.build:gradle:3.6.3")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
         classpath("org.koin:koin-gradle-plugin:${Versions.koin}")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}")

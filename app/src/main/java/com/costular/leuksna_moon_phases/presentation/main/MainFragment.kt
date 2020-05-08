@@ -16,7 +16,7 @@ import devs.mulham.horizontalcalendar.model.HorizontalCalendarConfig
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import io.uniflow.android.flow.onEvents
 import io.uniflow.android.flow.onStates
-import io.uniflow.core.flow.UIState
+import io.uniflow.core.flow.data.UIState
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel

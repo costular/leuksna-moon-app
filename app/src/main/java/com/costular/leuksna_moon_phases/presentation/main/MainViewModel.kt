@@ -4,10 +4,7 @@ import com.costular.leuksna_moon_phases.domain.model.MoonInfoRequest
 import com.costular.leuksna_moon_phases.presentation.calendar.CalendarState
 import com.costular.leuksna_moon_phases.presentation.settings.SettingsHelper
 import io.uniflow.android.flow.AndroidDataFlow
-import io.uniflow.core.flow.UIEvent
-import io.uniflow.core.flow.UIState
-import io.uniflow.core.flow.fromState
-import io.uniflow.core.flow.getStateAs
+import io.uniflow.core.flow.actionOn
 import kotlinx.coroutines.flow.onEach
 import org.threeten.bp.LocalDate
 
@@ -28,7 +25,7 @@ class MainViewModel(
         }
     }
 
-    fun getMoonInfo(localDate: LocalDate) = fromState<MainViewState> { state ->
+    fun getMoonInfo(localDate: LocalDate) = actionOn<MainViewState> { state ->
         val moonInfo = mainInteractor.getMoonInfo(
             MoonInfoRequest(
                 localDate,
@@ -37,22 +34,22 @@ class MainViewModel(
             )
         )
 
-        state.copy(
+        setState(state.copy(
             date = localDate,
             moonInfo = moonInfo
-        )
+        ))
     }
 
     fun selectDate(newDate: LocalDate) {
         getMoonInfo(newDate)
     }
 
-    fun openCalendar() = setState {
-        val selectedDate = getStateAs<MainViewState>().date
+    fun openCalendar() = actionOn<MainViewState> { state ->
+        val selectedDate = state.date
         sendEvent(MainEvents.OpenCalendar(selectedDate))
     }
 
-    fun openSettings() = setState {
+    fun openSettings() = action {
         sendEvent(MainEvents.OpenSettings)
     }
 

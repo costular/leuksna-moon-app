@@ -13,7 +13,7 @@ object Versions {
 
     val kotlin = "1.3.50"
     val coroutines = "1.3.3"
-    val koin = "2.1.1"
+    val koin = "2.1.5"
 
     val material = "1.2.0-alpha05"
     val appCompat = "1.1.0"
@@ -22,7 +22,7 @@ object Versions {
     val fragment = "1.3.0-alpha01"
     val navigation = "2.3.0-alpha02"
     val horizontalCalendar = "1.3.4"
-    val uniflow = "0.9.5"
+    val uniflow = "0.11.0"
     val threeTen = "1.2.2"
     val mockk = "1.9.3"
 
