@@ -59,12 +59,12 @@ class MainViewModelTest : CoroutineTest() {
                 // Then
                 val expected = MainViewState(
                     localDate,
-                    true,
                     Location.NotSet,
                     moonInfo
                 )
 
                 verifySequence {
+                    view.hasState(MainViewState())
                     view.hasState(expected)
                 }
             }

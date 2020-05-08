@@ -11,15 +11,9 @@ import org.threeten.bp.LocalDate
 class MainViewModel(
     private val mainInteractor: MainInteractor,
     settingsHelper: SettingsHelper
-) : AndroidDataFlow() {
+) : AndroidDataFlow(MainViewState()) {
 
     init {
-        action {
-            setState {
-                MainViewState()
-            }
-        }
-
         settingsHelper.observeLocation().onEach { location ->
             // TODO
         }

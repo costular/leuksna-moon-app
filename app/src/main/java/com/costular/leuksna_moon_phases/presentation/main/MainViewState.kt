@@ -7,7 +7,6 @@ import org.threeten.bp.LocalDate
 
 data class MainViewState(
     val date: LocalDate = LocalDate.now(),
-    val showStarsBackground: Boolean = true,
     val location: Location = Location.NotSet,
     val moonInfo: MoonInfo? = null
 ) : UIState()

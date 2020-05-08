@@ -43,6 +43,7 @@ class SettingsViewModelTest : CoroutineTest() {
 
             // Then
             verifySequence {
+                view.hasState(SettingsState())
                 view.hasState(expected)
             }
         }

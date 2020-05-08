@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.onEach
 
 class SettingsViewModel(
     private val settingsHelper: SettingsHelper
-) : AndroidDataFlow() {
+) : AndroidDataFlow(SettingsState()) {
 
     init {
         settingsHelper.observeLocation()

@@ -117,12 +117,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         if (state.date != horizontalCalendarConfig.selectedDate.time.toLocalDate()) {
             horizontalCalendarConfig.selectDate(state.date.toCalendar(), false)
         }
-
-        if (state.showStarsBackground) {
-            viewSky.onStart()
-        } else {
-            viewSky.onStart()
-        }
     }
 
     private fun handleError(throwable: Throwable?) {
