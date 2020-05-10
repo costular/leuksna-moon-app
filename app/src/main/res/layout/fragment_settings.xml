@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -110,14 +111,15 @@
             android:id="@+id/textLocation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="@string/settings_no_location"
             android:textAppearance="@style/TextAppearance.Body1"
             app:layout_constraintEnd_toStartOf="@+id/buttonSetLocation"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+            app:layout_constraintStart_toEndOf="@+id/buttonClearLocation"
+            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            app:layout_goneMarginStart="16dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonSetLocation"
@@ -130,6 +132,17 @@
             app:layout_constraintTop_toTopOf="@+id/textLocation"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             app:icon="@drawable/ic_set_location" />
+
+        <Button
+            android:id="@+id/buttonClearLocation"
+            style="@style/Widget.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:icon="@drawable/ic_close"
+            app:layout_constraintBottom_toBottomOf="@+id/textLocation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textLocation" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

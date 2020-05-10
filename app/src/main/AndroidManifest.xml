@@ -3,6 +3,7 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.costular.leuksna_moon_phases">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <dist:module dist:instant="true" />
 
     <application

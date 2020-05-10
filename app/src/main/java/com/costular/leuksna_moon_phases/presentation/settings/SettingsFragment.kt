@@ -1,7 +1,7 @@
 package com.costular.leuksna_moon_phases.presentation.settings
 
+import android.Manifest
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -11,15 +11,19 @@ import com.costular.leuksna_moon_phases.domain.model.Location
 import com.costular.leuksna_moon_phases.domain.model.MeasureUnit
 import com.costular.leuksna_moon_phases.util.gone
 import com.costular.leuksna_moon_phases.util.visible
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.snackbar.Snackbar
+import io.uniflow.android.flow.onEvents
 import io.uniflow.android.flow.onStates
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import permissions.dispatcher.NeedsPermission
+import permissions.dispatcher.RuntimePermissions
 
+@RuntimePermissions
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
-    val settingsViewModel: SettingsViewModel by viewModel()
+    private val settingsViewModel: SettingsViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,6 +33,13 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         onStates(settingsViewModel) { state ->
             when (state) {
                 is SettingsState -> handleState(state)
+            }
+        }
+        onEvents(settingsViewModel) { event ->
+            when (val data = event.take()) {
+                is SettingsEvents.RetrieveLocationFailure -> {
+                    showRetrieveLocationFailure(data.message)
+                }
             }
         }
 
@@ -44,6 +55,22 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private fun bindActions() {
         bindUnitToggle()
+        buttonSetLocation.setOnClickListener {
+            setLocationWithPermissionCheck()
+        }
+        buttonClearLocation.setOnClickListener {
+            settingsViewModel.clearLocation()
+        }
+    }
+
+    @NeedsPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+    fun setLocation() {
+        settingsViewModel.retrieveLocation()
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        onRequestPermissionsResult(requestCode, grantResults)
     }
 
     private fun bindUnitToggle() {
@@ -65,19 +92,28 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         when (state.location) {
             is Location.NotSet -> {
                 buttonSetLocation.visible()
+                buttonClearLocation.gone()
+                textLocation.setText(R.string.settings_no_location)
             }
             is Location.Set -> {
                 buttonSetLocation.gone()
+                buttonClearLocation.visible()
+                textLocation.text = state.location.name
             }
         }
     }
 
-    private val toggleUnitListener = MaterialButtonToggleGroup.OnButtonCheckedListener { view, _, _ ->
-        val unit = when (view.checkedButtonId) {
-            R.id.buttonMi -> MeasureUnit.MI
-            else -> MeasureUnit.KM
-        }
-        settingsViewModel.setMeasureUnit(unit)
+    private fun showRetrieveLocationFailure(message: String) {
+        Snackbar.make(root, message, Snackbar.LENGTH_SHORT).show()
     }
+
+    private val toggleUnitListener =
+        MaterialButtonToggleGroup.OnButtonCheckedListener { view, _, _ ->
+            val unit = when (view.checkedButtonId) {
+                R.id.buttonMi -> MeasureUnit.MI
+                else -> MeasureUnit.KM
+            }
+            settingsViewModel.setMeasureUnit(unit)
+        }
 
 }

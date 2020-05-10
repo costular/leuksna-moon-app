@@ -57,6 +57,9 @@ dependencies {
     implementation("com.sofakingforever.libraries:animated-stars-android:1.1.4@aar")
     implementation("com.github.kizitonwose:CalendarView:${Versions.calendarView}")
     implementation("com.github.tfcporciuncula:flow-preferences:${Versions.flowPreferences}")
+    implementation("com.google.android.gms:play-services-location:${Versions.playLocation}")
+    implementation("org.permissionsdispatcher:permissionsdispatcher:${Versions.permissionsDispatcher}")
+    kapt("org.permissionsdispatcher:permissionsdispatcher-processor:${Versions.permissionsDispatcher}")
 
     testImplementation("junit:junit:4.12")
     testImplementation("org.koin:koin-test:${Versions.koin}")

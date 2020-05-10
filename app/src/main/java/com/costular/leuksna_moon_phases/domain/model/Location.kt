@@ -6,7 +6,8 @@ sealed class Location {
 
     data class Set(
         val latitude: Double,
-        val longitude: Double
+        val longitude: Double,
+        val name: String
     ): Location()
 
 }

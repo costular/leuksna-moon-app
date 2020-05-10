@@ -1,5 +1,7 @@
 package com.costular.leuksna_moon_phases.presentation.main
 
+import com.costular.leuksna_moon_phases.di.settings
+import com.costular.leuksna_moon_phases.domain.model.Location
 import com.costular.leuksna_moon_phases.domain.model.MoonInfoRequest
 import com.costular.leuksna_moon_phases.presentation.calendar.CalendarState
 import com.costular.leuksna_moon_phases.presentation.settings.SettingsHelper
@@ -10,28 +12,28 @@ import org.threeten.bp.LocalDate
 
 class MainViewModel(
     private val mainInteractor: MainInteractor,
-    settingsHelper: SettingsHelper
+    private val settingsHelper: SettingsHelper
 ) : AndroidDataFlow(MainViewState()) {
 
-    init {
-        settingsHelper.observeLocation().onEach { location ->
-            // TODO
-        }
-    }
-
     fun getMoonInfo(localDate: LocalDate) = actionOn<MainViewState> { state ->
+        val location = settingsHelper.getLocation()
+        val latitude = if (location is Location.Set) location.latitude else null
+        val longitude = if (location is Location.Set) location.longitude else null
+
         val moonInfo = mainInteractor.getMoonInfo(
             MoonInfoRequest(
                 localDate,
-                null,
-                null // TODO get this from location
+                latitude,
+                longitude
             )
         )
 
-        setState(state.copy(
-            date = localDate,
-            moonInfo = moonInfo
-        ))
+        setState(
+            state.copy(
+                date = localDate,
+                moonInfo = moonInfo
+            )
+        )
     }
 
     fun selectDate(newDate: LocalDate) {

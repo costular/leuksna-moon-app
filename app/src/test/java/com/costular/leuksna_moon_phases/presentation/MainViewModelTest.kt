@@ -59,7 +59,6 @@ class MainViewModelTest : CoroutineTest() {
                 // Then
                 val expected = MainViewState(
                     localDate,
-                    Location.NotSet,
                     moonInfo
                 )
 
