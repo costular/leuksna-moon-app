@@ -11,6 +11,8 @@ import com.costular.leuksna_moon_phases.domain.model.Location
 import com.costular.leuksna_moon_phases.domain.model.MeasureUnit
 import com.costular.leuksna_moon_phases.util.gone
 import com.costular.leuksna_moon_phases.util.visible
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.button.MaterialButtonToggleGroup
 import io.uniflow.android.flow.onStates
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -41,20 +43,24 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     }
 
     private fun bindActions() {
-        toggleUnit.addOnButtonCheckedListener { view, _, _ ->
-            val unit = when (view.checkedButtonId) {
-                R.id.buttonMi -> MeasureUnit.MI
-                else -> MeasureUnit.KM
-            }
-            settingsViewModel.setMeasureUnit(unit)
-        }
+        bindUnitToggle()
+    }
+
+    private fun bindUnitToggle() {
+        toggleUnit.addOnButtonCheckedListener(toggleUnitListener)
+    }
+
+    private fun unbindUnitToggle() {
+        toggleUnit.removeOnButtonCheckedListener(toggleUnitListener)
     }
 
     private fun handleState(state: SettingsState) {
+        unbindUnitToggle()
         when (state.measureUnit) {
             MeasureUnit.KM -> toggleUnit.check(R.id.buttonKm)
             MeasureUnit.MI -> toggleUnit.check(R.id.buttonMi)
         }
+        bindUnitToggle()
 
         when (state.location) {
             is Location.NotSet -> {
@@ -64,6 +70,14 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 buttonSetLocation.gone()
             }
         }
+    }
+
+    private val toggleUnitListener = MaterialButtonToggleGroup.OnButtonCheckedListener { view, _, _ ->
+        val unit = when (view.checkedButtonId) {
+            R.id.buttonMi -> MeasureUnit.MI
+            else -> MeasureUnit.KM
+        }
+        settingsViewModel.setMeasureUnit(unit)
     }
 
 }
