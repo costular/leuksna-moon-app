@@ -8,5 +8,4 @@ sealed class MainEvents : UIEvent() {
     data class OpenCalendar(val selectedDate: LocalDate) : MainEvents()
 
     object OpenSettings : MainEvents()
-
 }

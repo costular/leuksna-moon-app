@@ -15,5 +15,4 @@ val data = module {
     single {
         MoonInfoMapper(get())
     }
-
 }

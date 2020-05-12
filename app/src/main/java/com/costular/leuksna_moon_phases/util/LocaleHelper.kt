@@ -7,7 +7,6 @@ import java.util.*
 interface LocaleHelper {
 
     fun getLocale(): Locale
-
 }
 
 class LocaleHelperImpl(private val resources: Resources) : LocaleHelper {
@@ -18,5 +17,4 @@ class LocaleHelperImpl(private val resources: Resources) : LocaleHelper {
         } else {
             resources.configuration.locale
         }
-
 }

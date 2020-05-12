@@ -1,6 +1,5 @@
 package com.costular.leuksna_moon_phases.presentation
 
-import com.costular.leuksna_moon_phases.domain.model.Location
 import com.costular.leuksna_moon_phases.domain.model.MoonInfo
 import com.costular.leuksna_moon_phases.domain.model.MoonPhase
 import com.costular.leuksna_moon_phases.domain.model.Zodiac
@@ -95,5 +94,4 @@ class MainViewModelTest : CoroutineTest() {
             }
         }
     }
-
 }

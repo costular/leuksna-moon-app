@@ -1,9 +1,9 @@
 package com.costular.leuksna_moon_phases.util
 
+import java.util.*
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneId
-import java.util.*
 
 fun LocalDate.toCalendar(): Calendar {
     val calendar = Calendar.getInstance()

@@ -19,12 +19,12 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven(url="http://dl.bintray.com/sofakingforever/libraries")
-        maven(url="https://jitpack.io")
+        maven(url = "http://dl.bintray.com/sofakingforever/libraries")
+        maven(url = "https://jitpack.io")
     }
 }
 
-tasks.register("clean",Delete::class){
+tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
 

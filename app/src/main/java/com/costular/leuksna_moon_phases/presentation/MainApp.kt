@@ -1,7 +1,11 @@
 package com.costular.leuksna_moon_phases.presentation
 
 import android.app.Application
-import com.costular.leuksna_moon_phases.di.*
+import com.costular.leuksna_moon_phases.di.app
+import com.costular.leuksna_moon_phases.di.data
+import com.costular.leuksna_moon_phases.di.main
+import com.costular.leuksna_moon_phases.di.calendar
+import com.costular.leuksna_moon_phases.di.settings
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -28,5 +32,4 @@ class MainApp : Application() {
             ))
         }
     }
-
 }

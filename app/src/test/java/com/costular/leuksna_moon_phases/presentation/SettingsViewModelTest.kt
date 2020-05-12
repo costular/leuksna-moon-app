@@ -1,6 +1,5 @@
 package com.costular.leuksna_moon_phases.presentation
 
-import android.icu.util.Measure
 import com.costular.leuksna_moon_phases.R
 import com.costular.leuksna_moon_phases.domain.model.Location
 import com.costular.leuksna_moon_phases.domain.model.LocationResult
@@ -74,7 +73,6 @@ class SettingsViewModelTest : CoroutineTest() {
                 view.hasState(SettingsState())
                 view.hasState(expected)
             }
-
         }
 
         "Given an error occurred when retrieving location then should send the event" {
@@ -119,5 +117,4 @@ class SettingsViewModelTest : CoroutineTest() {
             }
         }
     }
-
 }

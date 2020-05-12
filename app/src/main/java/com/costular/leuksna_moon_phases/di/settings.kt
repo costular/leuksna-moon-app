@@ -9,5 +9,4 @@ val settings = module {
     viewModel {
         SettingsViewModel(get(), get(), get())
     }
-
 }

@@ -1,7 +1,7 @@
 package com.costular.leuksna_moon_phases.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.costular.leuksna_moon_phases.R
 import com.costular.leuksna_moon_phases.presentation.main.MainViewModel
 import org.koin.android.ext.android.inject

@@ -7,7 +7,6 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint")
 }
 
-
 android {
     compileSdkVersion(App.compileVersion)
     buildToolsVersion(App.buildToolsVersion)

@@ -2,12 +2,9 @@ package com.costular.leuksna_moon_phases.presentation
 
 import com.costular.leuksna_moon_phases.presentation.calendar.CalendarState
 import com.costular.leuksna_moon_phases.presentation.calendar.CalendarViewModel
-import com.costular.leuksna_moon_phases.presentation.main.MainViewModel
 import io.kotlintest.TestCase
 import io.mockk.verifySequence
 import io.uniflow.android.test.MockedViewObserver
-import io.uniflow.android.test.TestViewObserver
-import io.uniflow.android.test.createTestObserver
 import io.uniflow.android.test.mockObservers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -47,7 +44,7 @@ class CalendarViewModelTest : CoroutineTest() {
                 val selectedDate = LocalDate.now().plusDays(2)
 
                 // When
-                calendarViewModel.selectDate(selectedDate);
+                calendarViewModel.selectDate(selectedDate)
 
                 // Then
                 verifySequence {

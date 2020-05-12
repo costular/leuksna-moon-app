@@ -7,4 +7,4 @@ import io.uniflow.core.flow.data.UIState
 data class SettingsState(
     val measureUnit: MeasureUnit = MeasureUnit.KM,
     val location: Location = Location.NotSet
-): UIState()
+) : UIState()

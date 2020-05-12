@@ -10,5 +10,4 @@ object UnitHelper {
             "US", "GB", "MM", "LR" -> MeasureUnit.MI
             else -> MeasureUnit.KM
         }
-
 }

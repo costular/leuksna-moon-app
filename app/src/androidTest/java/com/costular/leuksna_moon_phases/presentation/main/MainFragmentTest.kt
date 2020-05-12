@@ -1,17 +1,13 @@
 package com.costular.leuksna_moon_phases.presentation.main
 
-import android.Manifest
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.GrantPermissionRule
 import com.costular.leuksna_moon_phases.R
 import com.costular.leuksna_moon_phases.presentation.BaseCase
-import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Assert
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -63,5 +59,4 @@ class MainFragmentTest : BaseCase() {
                 Assert.assertEquals(R.id.calendarFragment, navController.currentDestination?.id)
             }
         }
-
 }
