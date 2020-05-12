@@ -30,10 +30,14 @@
             android:layout_marginStart="@dimen/layout_horizontal_keyline"
             android:layout_marginTop="@dimen/layout_vertical_keyline"
             android:layout_marginEnd="@dimen/layout_horizontal_keyline"
+            android:maxLines="1"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="32sp"
+            app:autoSizeMaxTextSize="48sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Full moon" />
+            tools:text="Waxing Crescent" />
 
         <TextView
             android:id="@+id/textCurrentDate"
