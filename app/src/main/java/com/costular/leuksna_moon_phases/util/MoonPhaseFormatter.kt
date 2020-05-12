@@ -31,5 +31,4 @@ class MoonPhaseFormatter(private val resources: Resources) {
             MoonPhase.WAXING_CRESCENT -> R.drawable.ic_art_waxing_crescent_moon
             MoonPhase.WAXING_GIBBOUS -> R.drawable.ic_art_waxing_gibbous_moon
         }
-
 }

@@ -1,13 +1,10 @@
 package com.costular.leuksna_moon_phases.presentation.main
 
-import com.costular.leuksna_moon_phases.di.settings
 import com.costular.leuksna_moon_phases.domain.model.Location
 import com.costular.leuksna_moon_phases.domain.model.MoonInfoRequest
-import com.costular.leuksna_moon_phases.presentation.calendar.CalendarState
 import com.costular.leuksna_moon_phases.presentation.settings.SettingsHelper
 import io.uniflow.android.flow.AndroidDataFlow
 import io.uniflow.core.flow.actionOn
-import kotlinx.coroutines.flow.onEach
 import org.threeten.bp.LocalDate
 
 class MainViewModel(
@@ -48,5 +45,4 @@ class MainViewModel(
     fun openSettings() = action {
         sendEvent(MainEvents.OpenSettings)
     }
-
 }

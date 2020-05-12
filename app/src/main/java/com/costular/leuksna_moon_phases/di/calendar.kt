@@ -9,5 +9,4 @@ val calendar = module {
     viewModel {
         CalendarViewModel()
     }
-
 }

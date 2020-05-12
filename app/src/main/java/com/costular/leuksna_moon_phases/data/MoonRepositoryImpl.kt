@@ -7,7 +7,6 @@ import com.costular.leuksna_moon_phases.domain.model.MoonInfoRequest
 class MoonRepositoryImpl : MoonRepository {
 
     override suspend fun getMoonInfo(moonInfoRequest: MoonInfoRequest): MoonInfo {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
-
 }

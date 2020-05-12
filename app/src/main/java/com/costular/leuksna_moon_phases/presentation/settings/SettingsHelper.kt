@@ -6,9 +6,7 @@ import com.costular.leuksna_moon_phases.domain.model.MeasureUnit
 import com.costular.leuksna_moon_phases.util.LocaleHelper
 import com.costular.leuksna_moon_phases.util.UnitHelper
 import com.tfcporciuncula.flow.FlowSharedPreferences
-import com.tfcporciuncula.flow.Preference
 import kotlinx.coroutines.flow.Flow
-
 
 interface SettingsHelper {
 
@@ -17,10 +15,9 @@ interface SettingsHelper {
 
     fun observeMeasureUnit(): Flow<MeasureUnit>
     fun observeLocation(): Flow<Location>
-    
+
     suspend fun setMeasureUnit(measureUnit: MeasureUnit)
     suspend fun setLocation(location: Location)
-
 }
 
 class SettingsHelperImpl(
@@ -65,6 +62,5 @@ class SettingsHelperImpl(
         private const val PREFS_NAME = "leuksna"
         private const val PREF_MEASURE_UNIT = "measure_unit"
         private const val PREF_LOCATION = "location"
-
     }
 }

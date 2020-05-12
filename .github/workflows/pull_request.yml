@@ -20,9 +20,6 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Run ktlint
-        run: ./gradlew --continue ktlintCheck
-
       - name: Run Android linter
         run: ./gradlew lintDebug
 

@@ -20,5 +20,4 @@ class MoonInfoMapper(private val settingsHelper: SettingsHelper) {
         )
 
     private fun printMeasureUnit(): String = settingsHelper.getMeasureUnit().value
-
 }

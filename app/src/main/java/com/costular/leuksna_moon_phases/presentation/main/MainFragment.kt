@@ -3,29 +3,24 @@ package com.costular.leuksna_moon_phases.presentation.main
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.costular.leuksna_moon_phases.R
-import com.costular.leuksna_moon_phases.presentation.calendar.CalendarFragmentArgs
 import com.costular.leuksna_moon_phases.util.MoonPhaseFormatter
 import com.costular.leuksna_moon_phases.util.ZodiacFormatter
 import com.costular.leuksna_moon_phases.util.toCalendar
 import com.costular.leuksna_moon_phases.util.toLocalDate
 import devs.mulham.horizontalcalendar.HorizontalCalendar
-import devs.mulham.horizontalcalendar.model.HorizontalCalendarConfig
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import io.uniflow.android.flow.onEvents
 import io.uniflow.android.flow.onStates
 import io.uniflow.core.flow.data.UIState
+import java.util.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.FormatStyle
-import java.util.*
-
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -120,7 +115,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun handleError(throwable: Throwable?) {
-
     }
 
     private fun openCalendar(selectedDate: LocalDate) {
@@ -132,6 +126,4 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         val action = MainFragmentDirections.actionMainFragmentToSettingsFragment()
         findNavController().navigate(action)
     }
-
-
 }

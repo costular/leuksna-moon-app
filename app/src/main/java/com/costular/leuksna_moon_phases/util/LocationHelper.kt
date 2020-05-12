@@ -6,14 +6,12 @@ import com.costular.leuksna_moon_phases.domain.model.LocationResult
 import com.google.android.gms.location.LocationServices
 import java.util.*
 import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 interface LocationHelper {
 
     suspend fun getLocation(): LocationResult
     fun getLocationName(latitude: Double, longitude: Double): String
-
 }
 
 class LocationHelperImpl(
@@ -42,5 +40,4 @@ class LocationHelperImpl(
         val address = geocoder.getFromLocation(latitude, longitude, 1)
         return "${address.first().locality}, ${address.first().countryName}"
     }
-
 }

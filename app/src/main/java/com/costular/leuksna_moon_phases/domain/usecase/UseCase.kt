@@ -7,5 +7,4 @@ abstract class UseCase<in M, out T> {
     }
 
     protected abstract suspend fun doWork(input: M): T
-
 }

@@ -6,5 +6,4 @@ import com.costular.leuksna_moon_phases.domain.model.MoonInfoRequest
 interface MoonRepository {
 
     suspend fun getMoonInfo(moonInfoRequest: MoonInfoRequest): MoonInfo
-
 }
