@@ -33,4 +33,6 @@ object Versions {
     val flowPreferences = "1.1.0"
     val kaspresso = "1.1.0"
 
+    val ktlintGradle = "9.2.1"
+
 }
