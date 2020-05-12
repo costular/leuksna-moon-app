@@ -2,13 +2,12 @@ package com.costular.leuksna_moon_phases.presentation.view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.costular.leuksna_moon_phases.R
 import com.costular.leuksna_moon_phases.util.readRecycling
-import kotlinx.android.synthetic.main.view_key_value.view.*
 import java.lang.IllegalStateException
 import kotlin.properties.Delegates.observable
+import kotlinx.android.synthetic.main.view_key_value.view.*
 
 class KeyValueView @JvmOverloads constructor(
     context: Context,
@@ -43,5 +42,4 @@ class KeyValueView @JvmOverloads constructor(
             this@KeyValueView.value = value
         }
     }
-
 }

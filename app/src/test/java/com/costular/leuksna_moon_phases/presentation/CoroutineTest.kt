@@ -14,7 +14,6 @@ import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 
-
 @ExperimentalCoroutinesApi
 abstract class CoroutineTest(
     protected val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
@@ -47,5 +46,4 @@ abstract class CoroutineTest(
         UniFlowDispatcher.dispatcher = ApplicationDispatchers()
         ArchTaskExecutor.getInstance().setDelegate(null)
     }
-
 }

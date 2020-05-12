@@ -23,5 +23,4 @@ class ZodiacFormatter(private val resources: Resources) {
         }
         return resources.getString(zodiacStringId)
     }
-
 }

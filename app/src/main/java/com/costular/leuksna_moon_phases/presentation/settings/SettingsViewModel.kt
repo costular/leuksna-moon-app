@@ -58,5 +58,4 @@ class SettingsViewModel(
     fun clearLocation() {
         setLocation(Location.NotSet)
     }
-
 }

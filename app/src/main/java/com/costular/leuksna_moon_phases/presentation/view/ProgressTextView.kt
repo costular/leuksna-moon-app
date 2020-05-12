@@ -3,7 +3,6 @@ package com.costular.leuksna_moon_phases.presentation.view
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.ColorUtils
@@ -125,18 +124,18 @@ class ProgressTextView @JvmOverloads constructor(
         calculate()
 
         if (isEnabled) {
-            with (textPaint) {
+            with(textPaint) {
                 color = textColor
             }
-            with (progressPaint) {
+            with(progressPaint) {
                 color = progressColor
             }
         } else {
-            with (textPaint) {
+            with(textPaint) {
                 val disabledColor = ColorUtils.setAlphaComponent(textColor, DISABLED_ALPHA)
                 color = disabledColor
             }
-            with (progressPaint) {
+            with(progressPaint) {
                 val disabledColor = ColorUtils.setAlphaComponent(progressColor, DISABLED_ALPHA)
                 color = disabledColor
             }
@@ -199,5 +198,4 @@ class ProgressTextView @JvmOverloads constructor(
         private val DEFAULT_WIDTH = 2.dp
         private const val DISABLED_ALPHA = 38
     }
-
 }

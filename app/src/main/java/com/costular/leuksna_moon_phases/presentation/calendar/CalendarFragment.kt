@@ -19,7 +19,7 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.WeekFields
-import java.util.*
+import java.util.Locale
 
 class CalendarFragment : RoundedBottomSheetFragment() {
 
@@ -107,5 +107,4 @@ class CalendarFragment : RoundedBottomSheetFragment() {
         calendar.notifyDateChanged(oldDate)
         calendar.notifyDateChanged(selectedDate)
     }
-
 }

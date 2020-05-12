@@ -68,7 +68,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         settingsViewModel.retrieveLocation()
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         onRequestPermissionsResult(requestCode, grantResults)
     }
@@ -115,5 +115,4 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             }
             settingsViewModel.setMeasureUnit(unit)
         }
-
 }

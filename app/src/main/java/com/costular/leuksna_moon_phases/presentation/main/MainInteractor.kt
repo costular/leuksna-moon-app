@@ -1,8 +1,8 @@
 package com.costular.leuksna_moon_phases.presentation.main
 
-import com.costular.leuksna_moon_phases.domain.usecase.GetMoonInfoUseCase
 import com.costular.leuksna_moon_phases.domain.model.MoonInfo
 import com.costular.leuksna_moon_phases.domain.model.MoonInfoRequest
+import com.costular.leuksna_moon_phases.domain.usecase.GetMoonInfoUseCase
 
 interface MainInteractor {
     suspend fun getMoonInfo(moonInfoRequest: MoonInfoRequest): MoonInfo
@@ -20,5 +20,4 @@ class MainInteractorImpl(
                 moonInfoRequest.longitude
             )
         )
-
 }
