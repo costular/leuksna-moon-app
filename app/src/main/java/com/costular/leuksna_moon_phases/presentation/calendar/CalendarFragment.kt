@@ -86,9 +86,11 @@ class CalendarFragment : RoundedBottomSheetFragment() {
                 calendarViewModel.selectDate(date)
             }
             val current = YearMonth.now()
+            val selectedMonth = selectedDate.yearMonth
+
             val firstDayOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek
             setup(current.minusMonths(12), current.plusMonths(12), firstDayOfWeek)
-            scrollToMonth(current)
+            scrollToMonth(selectedMonth)
 
             monthScrollListener = { month ->
                 textHeader.text = "${month.yearMonth.format(monthFormatter)} ${month.year}"
