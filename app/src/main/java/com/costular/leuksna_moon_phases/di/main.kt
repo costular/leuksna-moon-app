@@ -11,7 +11,7 @@ import org.koin.dsl.module
 val main = module {
 
     single {
-        GetMoonInfoUseCase(get(StringQualifier("fake")))
+        GetMoonInfoUseCase(get())
     }
 
     single<MainInteractor> {
