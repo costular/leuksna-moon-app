@@ -27,6 +27,7 @@ object Versions {
     val mockk = "1.10.0"
     val playLocation = "17.0.0"
     val permissionsDispatcher = "4.7.0"
+    val sunkalc = "0.2"
 
     val kotlintest = "2.0.7"
     val calendarView = "0.3.2"

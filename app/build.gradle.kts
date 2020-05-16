@@ -60,6 +60,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:${Versions.playLocation}")
     implementation("org.permissionsdispatcher:permissionsdispatcher:${Versions.permissionsDispatcher}")
     kapt("org.permissionsdispatcher:permissionsdispatcher-processor:${Versions.permissionsDispatcher}")
+    implementation("com.costular:sunkalc:${Versions.sunkalc}") {
+        exclude(group = "org.threeten")
+    }
 
     testImplementation("junit:junit:4.12")
     testImplementation("org.koin:koin-test:${Versions.koin}")
