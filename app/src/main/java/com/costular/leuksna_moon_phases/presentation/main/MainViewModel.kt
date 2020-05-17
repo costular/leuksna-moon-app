@@ -15,6 +15,10 @@ class MainViewModel(
     private val settingsHelper: SettingsHelper
 ) : AndroidDataFlow(MainViewState()) {
 
+    init {
+        getMoonInfo(LocalDate.now())
+    }
+
     fun getMoonInfo(localDate: LocalDate) = actionOn<MainViewState> { state ->
         val location = settingsHelper.getLocation()
         val latitude = if (location is Location.Set) location.latitude else null

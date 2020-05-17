@@ -48,7 +48,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         bindActions()
         generateCalendar()
-        mainViewModel.getMoonInfo(LocalDate.now())
     }
 
     private fun bindActions() {
@@ -110,7 +109,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
 
         if (state.date != horizontalCalendarConfig.selectedDate.time.toLocalDate()) {
-            horizontalCalendarConfig.selectDate(state.date.toCalendar(), false)
+            horizontalCalendarConfig.selectDate(state.date.toCalendar(), true)
         }
     }
 
