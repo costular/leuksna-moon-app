@@ -9,6 +9,7 @@ import com.costular.leuksna_moon_phases.presentation.main.MainViewModel
 import com.costular.leuksna_moon_phases.presentation.main.MainViewState
 import com.costular.leuksna_moon_phases.presentation.settings.SettingsHelper
 import io.kotlintest.TestCase
+import io.kotlintest.shouldBe
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verifySequence
@@ -91,6 +92,20 @@ class MainViewModelTest : CoroutineTest() {
             // Then
             verifySequence {
                 view.hasEvent(MainEvents.OpenSettings)
+            }
+        }
+
+        "When get the day progress then should return moon visibility correctly" {
+            testDispatcher.runBlockingTest {
+                // Given
+                val expected = 100
+                coEvery { mainInteractor.getMoonVisibility(any()) } returns expected
+
+                // When
+                val actual = mainViewModel.getDayProgress(LocalDate.now())
+
+                // Then
+                actual.shouldBe(expected)
             }
         }
     }
