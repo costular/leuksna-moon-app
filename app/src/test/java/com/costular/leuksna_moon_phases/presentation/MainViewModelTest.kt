@@ -1,5 +1,6 @@
 package com.costular.leuksna_moon_phases.presentation
 
+import com.costular.leuksna_moon_phases.domain.model.Location
 import com.costular.leuksna_moon_phases.domain.model.MoonInfo
 import com.costular.leuksna_moon_phases.domain.model.MoonPhase
 import com.costular.leuksna_moon_phases.domain.model.Zodiac
@@ -11,6 +12,7 @@ import com.costular.leuksna_moon_phases.presentation.settings.SettingsHelper
 import io.kotlintest.TestCase
 import io.kotlintest.shouldBe
 import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verifySequence
 import io.uniflow.android.test.MockedViewObserver
@@ -40,6 +42,8 @@ class MainViewModelTest : CoroutineTest() {
         "Given a success return when get the moon info then should update the view state accordingly" {
             testDispatcher.runBlockingTest {
                 // Given
+                val location = Location.NotSet
+
                 val moonInfo = MoonInfo(
                     LocalDate.of(2020, 2, 28),
                     MoonPhase.FULL_MOON,
@@ -51,6 +55,7 @@ class MainViewModelTest : CoroutineTest() {
                     LocalDateTime.now().plusHours(3).plusMinutes(24)
                 )
                 coEvery { mainInteractor.getMoonInfo(any()) } returns moonInfo
+                every { settingsHelper.getLocation() } returns location
 
                 // When
                 val localDate = LocalDate.now()
