@@ -48,6 +48,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         bindActions()
         generateCalendar()
+        mainViewModel.getMoonInfo()
     }
 
     private fun bindActions() {
