@@ -1,6 +1,7 @@
 package com.costular.leuksna_moon_phases.di
 
 import com.costular.leuksna_moon_phases.domain.usecase.GetMoonInfoUseCase
+import com.costular.leuksna_moon_phases.domain.usecase.GetMoonVisibility
 import com.costular.leuksna_moon_phases.presentation.main.MainInteractor
 import com.costular.leuksna_moon_phases.presentation.main.MainInteractorImpl
 import com.costular.leuksna_moon_phases.presentation.main.MainViewModel
@@ -14,8 +15,12 @@ val main = module {
         GetMoonInfoUseCase(get())
     }
 
+    single {
+        GetMoonVisibility(get())
+    }
+
     single<MainInteractor> {
-        MainInteractorImpl(get())
+        MainInteractorImpl(get(), get())
     }
 
     viewModel {

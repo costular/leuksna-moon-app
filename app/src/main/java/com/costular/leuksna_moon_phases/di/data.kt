@@ -1,6 +1,5 @@
 package com.costular.leuksna_moon_phases.di
 
-import com.costular.leuksna_moon_phases.data.FakeMoonRepository
 import com.costular.leuksna_moon_phases.data.MoonRepositoryImpl
 import com.costular.leuksna_moon_phases.data.mapper.SunkalckMapper
 import com.costular.leuksna_moon_phases.domain.MoonRepository
@@ -16,10 +15,6 @@ val data = module {
 
     single {
         SunkalckMapper(get())
-    }
-
-    single<MoonRepository>(qualifier = StringQualifier("fake")) {
-        FakeMoonRepository(get())
     }
 
     single<MoonRepository> {
