@@ -32,17 +32,15 @@ jobs:
 
       - name: Assemble APK
         env:
-          ANDROID_KEYSTORE_ALIAS: ${{ ANDROID_KEYSTORE_ALIAS }}
-          ANDROID_KEYSTORE_PASSPHRASE: ${{ ANDROID_KEYSTORE_PASSPHRASE }}
+          ANDROID_KEYSTORE_ALIAS: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
+          ANDROID_KEYSTORE_PASSPHRASE: ${{ secrets.ANDROID_KEYSTORE_PASSPHRASE }}
         run:
           ./gradlew assembleRelease
 
       - name: Upload APK
-        env:
-          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJson: ${{ SERVICE_ACCOUNT }}
+          serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT }}
           packageName: com.costular.leuksna_moon_phases
           releaseFile: app/build/outputs/apk/release/app-release.apk
           track: beta
