@@ -16,6 +16,7 @@ buildscript {
         classpath("org.koin:koin-gradle-plugin:${Versions.koin}")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}")
         classpath("org.jlleitschuh.gradle:ktlint-gradle:${Versions.ktlintGradle}")
+        classpath("com.google.gms:google-services:4.3.3")
     }
 }
 
