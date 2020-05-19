@@ -5,4 +5,4 @@ import org.threeten.bp.LocalDate
 
 data class CalendarState(
     val selectedDate: LocalDate = LocalDate.now()
-): UIState()
+) : UIState()

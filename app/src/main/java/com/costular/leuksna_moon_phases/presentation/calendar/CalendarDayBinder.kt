@@ -8,15 +8,16 @@ import org.threeten.bp.LocalDate
 
 class CalendarDayBinder(
     var selectedDate: LocalDate,
+    private val progressGetter: (date: LocalDate) -> Int,
     private val listener: (date: LocalDate) -> Unit
 ) : DayBinder<CalendarDayView> {
 
     override fun create(view: View): CalendarDayView = CalendarDayView(view)
 
     override fun bind(container: CalendarDayView, day: CalendarDay) {
-        with (container.progressView) {
+        with(container.progressView) {
             updateContent(day.day.toString())
-            updateProgress((0..100).random()) // TODO faked for now
+            updateProgress(progressGetter(day.date))
 
             isSelected = day.date == selectedDate
             isEnabled = day.owner == DayOwner.THIS_MONTH
@@ -26,5 +27,4 @@ class CalendarDayBinder(
             }
         }
     }
-
 }

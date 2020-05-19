@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.costular.leuksna_moon_phases.R
+import com.costular.leuksna_moon_phases.di.calendar
 import com.costular.leuksna_moon_phases.presentation.main.MainViewModel
 import com.costular.leuksna_moon_phases.presentation.view.RoundedBottomSheetFragment
 import com.kizitonwose.calendarview.utils.next
@@ -19,7 +20,7 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.WeekFields
-import java.util.*
+import java.util.Locale
 
 class CalendarFragment : RoundedBottomSheetFragment() {
 
@@ -81,10 +82,11 @@ class CalendarFragment : RoundedBottomSheetFragment() {
 
     private fun initCalendar() {
         with(calendar) {
-            dayBinder = CalendarDayBinder(selectedDate) { date ->
-                mainViewModel.selectDate(date)
-                calendarViewModel.selectDate(date)
-            }
+            dayBinder =
+                CalendarDayBinder(selectedDate, { mainViewModel.getDayProgress(it) }) { date ->
+                    mainViewModel.selectDate(date)
+                    calendarViewModel.selectDate(date)
+                }
             val current = YearMonth.now()
             val selectedMonth = selectedDate.yearMonth
 
@@ -107,5 +109,4 @@ class CalendarFragment : RoundedBottomSheetFragment() {
         calendar.notifyDateChanged(oldDate)
         calendar.notifyDateChanged(selectedDate)
     }
-
 }

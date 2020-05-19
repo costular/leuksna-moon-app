@@ -41,7 +41,8 @@ class GetMoonInfoUseCaseTest : CoroutineTest() {
             coEvery { moonRepository.getMoonInfo(any()) } returns expected
 
             // When
-            val actual = getMoonInfoUseCase.execute(GetMoonInfoUseCase.Params(LocalDate.now(), null, null))
+            val actual =
+                getMoonInfoUseCase.execute(GetMoonInfoUseCase.Params(LocalDate.now(), null, null))
 
             // Then
             actual.shouldBe(expected)

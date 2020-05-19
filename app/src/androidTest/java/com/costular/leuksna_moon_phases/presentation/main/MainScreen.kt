@@ -11,5 +11,4 @@ object MainScreen : KScreen<MainScreen>() {
 
     val settingsButton = KView { withId(R.id.buttonSettings) }
     val calendarButton = KView { withId(R.id.buttonCalendar) }
-
 }

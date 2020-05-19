@@ -2,7 +2,6 @@ package com.costular.leuksna_moon_phases.util
 
 import android.content.res.Resources
 import android.content.res.TypedArray
-import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import androidx.annotation.AttrRes

@@ -5,5 +5,4 @@ import io.uniflow.core.flow.data.UIEvent
 sealed class SettingsEvents : UIEvent() {
 
     data class RetrieveLocationFailure(val message: String) : SettingsEvents()
-
 }

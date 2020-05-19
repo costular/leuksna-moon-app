@@ -11,5 +11,4 @@ sealed class LocationResult {
     data class Failure(
         val error: Throwable
     ) : LocationResult()
-
 }
