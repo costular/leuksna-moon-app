@@ -26,15 +26,15 @@ jobs:
         run: echo $FIREBASE_CONFIG > app/google-services.json
 
       - name: Decode service account key
-          env:
-            SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
+        ¡env:
+          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
 
       - name: Decode keystore
         run: |
-        echo "${{ secrets.ANDROID_KEYSTORE }}" > release.keystore.asc
-        gpg -d --passphrase "${{ secrets.ANDROID_KEYSTORE_PASSPHRASE }}" --batch release.keystore.asc > release.keystore
+          echo "${{ secrets.ANDROID_KEYSTORE }}" > release.keystore.asc
+          gpg -d --passphrase "${{ secrets.ANDROID_KEYSTORE_PASSPHRASE }}" --batch release.keystore.asc > release.keystore
 
-      -name: Assemble APK
+      - name: Assemble APK
         env:
           ANDROID_KEYSTORE_ALIAS: ${{ ANDROID_KEYSTORE_ALIAS }}
           ANDROID_KEYSTORE_PASSPHRASE: ${{ ANDROID_KEYSTORE_PASSPHRASE }}
