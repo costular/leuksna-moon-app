@@ -44,6 +44,5 @@ jobs:
           packageName: com.costular.leuksna_moon_phases
           releaseFile: app/build/outputs/apk/release/app-release.apk
           track: beta
-          userFraction: 1.0
           whatsNewDirectory: /distribution/whatsnew
           mappingFile: /app/build/outputs/mapping/release/mapping.txt
