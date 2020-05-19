@@ -25,10 +25,6 @@ jobs:
           FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
         run: echo $FIREBASE_CONFIG > app/google-services.json
 
-      - name: Decode service account key
-        ¡env:
-          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
-
       - name: Decode keystore
         run: |
           echo "${{ secrets.ANDROID_KEYSTORE }}" > release.keystore.asc
@@ -42,6 +38,8 @@ jobs:
           ./gradlew assembleRelease
 
       - name: Upload APK
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJson: ${{ SERVICE_ACCOUNT }}
