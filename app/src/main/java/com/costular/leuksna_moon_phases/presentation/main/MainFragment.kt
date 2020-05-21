@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.costular.leuksna_moon_phases.R
 import com.costular.leuksna_moon_phases.util.MoonPhaseFormatter
 import com.costular.leuksna_moon_phases.util.ZodiacFormatter
-import com.kizitonwose.calendarview.utils.yearMonth
 import io.uniflow.android.flow.onEvents
 import io.uniflow.android.flow.onStates
 import io.uniflow.core.flow.data.UIState
