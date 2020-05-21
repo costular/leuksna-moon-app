@@ -1,9 +1,11 @@
 package com.costular.leuksna_moon_phases.presentation.calendar
 
+import android.graphics.Color
 import android.view.View
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
+import kotlinx.android.synthetic.main.item_week_day.view.*
 import org.threeten.bp.LocalDate
 
 class CalendarDayBinder(
@@ -19,7 +21,8 @@ class CalendarDayBinder(
             updateContent(day.day.toString())
             updateProgress(progressGetter(day.date))
 
-            isSelected = day.date == selectedDate
+            val shouldBeSelected = day.date == selectedDate
+            isSelected = shouldBeSelected
             isEnabled = day.owner == DayOwner.THIS_MONTH
 
             setOnClickListener {

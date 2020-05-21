@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/layout_vertical_keyline"
+    android:paddingBottom="@dimen/layout_vertical_keyline"
+    android:background="@drawable/state_bg_calendar_week_day">
+
+    <TextView
+        android:id="@+id/textMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="May"
+        android:textColor="@drawable/selector_week_day_text_color"
+        style="@style/WeekDayMonth"/>
+
+    <TextView
+        android:id="@+id/textDay"
+        style="@style/WeekDayNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textMonth"
+        android:textColor="@drawable/selector_week_day_text_color"
+        tools:text="24" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

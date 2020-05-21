@@ -7,6 +7,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint")
     id("com.google.gms.google-services")
     id("com.github.triplet.play") version "2.7.5"
+    id("io.fabric")
 }
 
 android {
@@ -46,6 +47,7 @@ android {
 
 play {
     serviceAccountCredentials = file("service-account-key.json")
+    defaultToAppBundles = true
 }
 
 tasks.withType<Test> {
@@ -64,7 +66,6 @@ dependencies {
     implementation("com.google.android.material:material:${Versions.material}")
     implementation("androidx.navigation:navigation-fragment-ktx:${Versions.navigation}")
     implementation("androidx.navigation:navigation-ui-ktx:${Versions.navigation}")
-    implementation("devs.mulham.horizontalcalendar:horizontalcalendar:${Versions.horizontalCalendar}")
     implementation("org.koin:koin-androidx-viewmodel:${Versions.koin}")
     implementation("org.koin:koin-androidx-fragment:${Versions.koin}")
     implementation("io.uniflow:uniflow-android:${Versions.uniflow}")
@@ -78,7 +79,8 @@ dependencies {
     implementation("com.costular:sunkalc:${Versions.sunkalc}") {
         exclude(group = "org.threeten")
     }
-    implementation("com.google.firebase:firebase-analytics:17.2.2")
+    implementation("com.google.firebase:firebase-analytics:17.4.1")
+    implementation("com.crashlytics.sdk.android:crashlytics:2.10.1")
 
     testImplementation("junit:junit:4.12")
     testImplementation("org.koin:koin-test:${Versions.koin}")

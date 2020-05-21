@@ -10,6 +10,7 @@ buildscript {
         google()
         jcenter()
         maven("https://plugins.gradle.org/m2/")
+        maven("https://maven.fabric.io/public")
     }
     dependencies {
         classpath("com.android.tools.build:gradle:3.6.1")
@@ -18,6 +19,7 @@ buildscript {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}")
         classpath("org.jlleitschuh.gradle:ktlint-gradle:${Versions.ktlintGradle}")
         classpath("com.google.gms:google-services:4.3.3")
+        classpath("io.fabric.tools:gradle:1.31.2")
     }
 }
 

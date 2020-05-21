@@ -34,4 +34,12 @@
         <item name="android:layout_height">24dp</item>
     </style>
 
+    <style name="WeekDayMonth">
+        <item name="android:textAppearance">@style/TextAppearance.Body2</item>
+    </style>
+
+    <style name="WeekDayNumber">
+        <item name="android:textAppearance">@style/TextAppearance.Headline6</item>
+    </style>
+
 </resources>

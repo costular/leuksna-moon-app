@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Leuksna Fases Lunares</string>
+    <string name="new_moon">Luna Nueva</string>
+    <string name="full_moon">Luna Llena</string>
+    <string name="aries">Aries</string>
+    <string name="taurus">Tauro</string>
+    <string name="gemini">Géminis</string>
+    <string name="cancer">Cáncer</string>
+    <string name="leo">Leo</string>
+    <string name="virgo">Virgo</string>
+    <string name="libra">Libra</string>
+    <string name="scorpio">Escorpio</string>
+    <string name="sagittarius">Sagitario</string>
+    <string name="capricorn">Capricornio</string>
+    <string name="aquarius">Acuario</string>
+    <string name="pisces">Piscis</string>
+    <string name="main_distance">Distancia</string>
+    <string name="main_altitude">Altitud</string>
+    <string name="main_luminosity">Luminosidad</string>
+    <string name="main_zodiac">Zodiaco</string>
+    <string name="settings">Ajustes</string>
+    <string name="settings_general">General</string>
+    <string name="settings_general_unit">Unidad de medida</string>
+    <string name="settings_location">Ubicación</string>
+    <string name="settings_no_location">Sin determinar</string>
+    <string name="settings_retrieve_location_failure_message">Oops! Algo salió mal obteniendo tu ubicación. Inténtalo de nuevo</string>
+    <string name="settings_notifications">Notificaciones</string>
+    <string name="settings_notifications_full_moon">Notificar cuando haya luna llena</string>
+    <string name="settings_notifications_new_moon">Notificar cuando haya luna nueva</string>
+    <string name="waxing_crescent">Luna Creciente</string>
+    <string name="first_quarter">Cuarto Creciente</string>
+    <string name="waxing_gibbous">Luna Gibosa Creciente</string>
+    <string name="waning_gibbous">Luna Gibosa Menguante</string>
+    <string name="last_quarter">Cuarto Menguante</string>
+    <string name="waning_crescent">Luna Menguante</string>
+    <string name="main_moonrise">Salida Lunar</string>
+    <string name="main_moonset">Puesta Lunar</string>
+    <string name="settings_location_set_location">Editar</string>
+</resources>
