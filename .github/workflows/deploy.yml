@@ -30,22 +30,13 @@ jobs:
           echo "${{ secrets.ANDROID_KEYSTORE }}" > release.keystore.asc
           gpg -d --passphrase "${{ secrets.ANDROID_KEYSTORE_PASSPHRASE }}" --batch release.keystore.asc > release.keystore
 
-      - name: Assemble APK
+      - name: Decode service account key
         env:
-          ANDROID_KEYSTORE_ALIAS: ${{ ANDROID_KEYSTORE_ALIAS }}
-          ANDROID_KEYSTORE_PASSPHRASE: ${{ ANDROID_KEYSTORE_PASSPHRASE }}
-        run:
-          ./gradlew assembleRelease
+          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+        run: echo $SERVICE_ACCOUNT > service-account-key.json
 
-      - name: Upload APK
+      - name: Publish APK
         env:
-          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
-        uses: r0adkll/upload-google-play@v1
-        with:
-          serviceAccountJson: ${{ SERVICE_ACCOUNT }}
-          packageName: com.costular.leuksna_moon_phases
-          releaseFile: app/build/outputs/apk/release/app-release.apk
-          track: beta
-          userFraction: 1.0
-          whatsNewDirectory: /distribution/whatsnew
-          mappingFile: /app/build/outputs/mapping/release/mapping.txt
+          ANDROID_KEYSTORE_ALIAS: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
+          ANDROID_KEYSTORE_PASSPHRASE: ${{ secrets.ANDROID_KEYSTORE_PASSPHRASE }}
+        run: ./gradlew publishStagingRelease
