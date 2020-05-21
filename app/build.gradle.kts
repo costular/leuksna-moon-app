@@ -6,6 +6,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("org.jlleitschuh.gradle.ktlint")
     id("com.google.gms.google-services")
+    id("com.github.triplet.play") version "2.7.5"
 }
 
 android {
@@ -41,6 +42,10 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+}
+
+play {
+    serviceAccountCredentials = file("service-account-key.json")
 }
 
 tasks.withType<Test> {
