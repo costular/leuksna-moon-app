@@ -46,6 +46,7 @@ android {
 
 play {
     serviceAccountCredentials = file("service-account-key.json")
+    defaultToAppBundles = true
 }
 
 tasks.withType<Test> {

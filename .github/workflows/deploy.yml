@@ -33,10 +33,10 @@ jobs:
       - name: Decode service account key
         env:
           SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT_JSON }}
-        run: echo $SERVICE_ACCOUNT > service-account-key.json
+        run: echo $SERVICE_ACCOUNT > app/service-account-key.json
 
       - name: Publish APK
         env:
           ANDROID_KEYSTORE_ALIAS: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
           ANDROID_KEYSTORE_PASSPHRASE: ${{ secrets.ANDROID_KEYSTORE_PASSPHRASE }}
-        run: ./gradlew publishStagingRelease
+        run: ./gradlew publish
