@@ -113,16 +113,21 @@
             app:layout_constraintStart_toStartOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-        <devs.mulham.horizontalcalendar.HorizontalCalendarView
+        <com.kizitonwose.calendarview.CalendarView
             android:id="@+id/horizontalCalendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:background="?colorSurface"
+            app:cv_hasBoundaries="false"
+            app:cv_inDateStyle="none"
+            app:cv_outDateStyle="none"
+            app:cv_maxRowCount="1"
+            app:cv_orientation="horizontal"
+            app:cv_scrollMode="continuous"
+            app:cv_dayViewResource="@layout/item_week_day"
             app:layout_constraintBottom_toTopOf="@+id/buttonCalendar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:textColorSelected="?colorPrimary" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/imageView"

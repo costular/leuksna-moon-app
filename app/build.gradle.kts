@@ -65,7 +65,6 @@ dependencies {
     implementation("com.google.android.material:material:${Versions.material}")
     implementation("androidx.navigation:navigation-fragment-ktx:${Versions.navigation}")
     implementation("androidx.navigation:navigation-ui-ktx:${Versions.navigation}")
-    implementation("devs.mulham.horizontalcalendar:horizontalcalendar:${Versions.horizontalCalendar}")
     implementation("org.koin:koin-androidx-viewmodel:${Versions.koin}")
     implementation("org.koin:koin-androidx-fragment:${Versions.koin}")
     implementation("io.uniflow:uniflow-android:${Versions.uniflow}")
