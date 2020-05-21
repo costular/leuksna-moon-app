@@ -7,6 +7,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint")
     id("com.google.gms.google-services")
     id("com.github.triplet.play") version "2.7.5"
+    id("io.fabric")
 }
 
 android {
@@ -78,7 +79,8 @@ dependencies {
     implementation("com.costular:sunkalc:${Versions.sunkalc}") {
         exclude(group = "org.threeten")
     }
-    implementation("com.google.firebase:firebase-analytics:17.2.2")
+    implementation("com.google.firebase:firebase-analytics:17.4.1")
+    implementation("com.crashlytics.sdk.android:crashlytics:2.10.1")
 
     testImplementation("junit:junit:4.12")
     testImplementation("org.koin:koin-test:${Versions.koin}")
