@@ -37,9 +37,8 @@
     <string name="settings">Settings</string>
     <string name="settings_general">General</string>
     <string name="settings_general_unit">Unit of measure</string>
-    <string name="settings_general_unit_km">km</string>
-    <string name="settings_general_unit_mi">mi</string>
-    <string name="settings_general_show_stars_background">Show stars background</string>
+    <string name="settings_general_unit_km" translatable="false">km</string>
+    <string name="settings_general_unit_mi" translatable="false">mi</string>
 
     <string name="settings_location">Location</string>
     <string name="settings_no_location">No location</string>
