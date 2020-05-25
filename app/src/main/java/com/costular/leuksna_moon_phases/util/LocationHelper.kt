@@ -2,6 +2,7 @@ package com.costular.leuksna_moon_phases.util
 
 import android.content.Context
 import android.location.Geocoder
+import android.location.Location
 import com.costular.leuksna_moon_phases.domain.model.LocationResult
 import com.google.android.gms.location.LocationServices
 import java.util.*
@@ -21,14 +22,18 @@ class LocationHelperImpl(
 
     override suspend fun getLocation(): LocationResult = suspendCoroutine { coroutine ->
         val locationClient = LocationServices.getFusedLocationProviderClient(contextApplication)
-        locationClient.lastLocation.addOnSuccessListener {
-            coroutine.resume(
-                LocationResult.Success(
-                    it.latitude,
-                    it.longitude,
-                    getLocationName(it.latitude, it.longitude)
+        locationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location != null) {
+                coroutine.resume(
+                    LocationResult.Success(
+                        location.latitude,
+                        location.longitude,
+                        getLocationName(location.latitude, location.longitude)
+                    )
                 )
-            )
+            } else {
+                coroutine.resume(LocationResult.Failure(LocationUnknownException()))
+            }
         }
         locationClient.lastLocation.addOnFailureListener { exception ->
             coroutine.resume(LocationResult.Failure(exception))
