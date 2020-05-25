@@ -50,7 +50,7 @@ android {
 configure<PlayPublisherExtension> {
     serviceAccountCredentials = file("service-account-key.json")
     defaultToAppBundles = true
-    promoteTrack = "alpha"
+    track = "production"
     outputProcessor { versionNameOverride = "$versionNameOverride.$versionCode" }
     resolutionStrategy = "auto"
 }
