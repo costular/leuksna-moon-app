@@ -1,3 +1,5 @@
+import com.github.triplet.gradle.play.PlayPublisherExtension
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -45,9 +47,12 @@ android {
     }
 }
 
-play {
+configure<PlayPublisherExtension> {
     serviceAccountCredentials = file("service-account-key.json")
     defaultToAppBundles = true
+    promoteTrack = "alpha"
+    outputProcessor { versionNameOverride = "$versionNameOverride.$versionCode" }
+    resolutionStrategy = "auto"
 }
 
 tasks.withType<Test> {
