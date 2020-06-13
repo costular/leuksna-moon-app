@@ -4,8 +4,8 @@ object App {
     val buildToolsVersion = "29.0.2"
     val minSdk = 21
     val targetSdk = 29
-    val versionCode = 3
-    val versionName = "1.0.2"
+    val versionCode = 4
+    val versionName = "1.0.3"
 
 }
 
