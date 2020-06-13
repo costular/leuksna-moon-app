@@ -1,0 +1,15 @@
+Leuksna (luna del latín) es una app completamente gratuita, sin anuncios y open source donde podrás apreciar el calendario lunar para el día actual, pasados o futuros usando algoritmos aprobados por la comunidad científica. 
+
+La aplicación aporta las siguientes funciones:
+
+✅ Comprueba el calendario lunar y las fases lunares: podrás saber cuándo es la siguiente luna llena, luna nueva, luna creciente, cuarto creciente, luna gibosa creciente, luna gibosa menguante, cuarto menguante, luna menguante o luna negra.
+✅ Chequea parámetros de la luna: a qué distancia está, a qué altura, entre otros.
+✅ Conoce a qué hora saldrá la luna y a qué hora se pondrá para saber con mayor exactitud cuándo puedes observarla.
+✅ Añade tu ubicación para poder obtener los datos con mayor exactitud según tu localización
+✅  Conoce el horóscopo lunar o el signo lunar ♐️♎️♌️♊️♈️♓️♑️♏️♍️♋️♉️
+
+En definitiva Leuksna te permite es una app para los amantes de la luna donde podrás conocer toda la información sobre el calendario lunar y las fases lunares de una forma simple y elegante sin mostrarte anuncios o cobrarte. 
+
+¡No te quedes sin saber más sobra la luna!
+
+El código open source está disponible en github.com/costular/leuksna-moon-app

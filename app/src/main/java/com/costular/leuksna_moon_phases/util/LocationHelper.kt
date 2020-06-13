@@ -1,5 +1,6 @@
 package com.costular.leuksna_moon_phases.util
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Geocoder
 import android.location.Location
@@ -20,17 +21,22 @@ class LocationHelperImpl(
     private val localeHelper: LocaleHelper
 ) : LocationHelper {
 
+    @SuppressLint("MissingPermission")
     override suspend fun getLocation(): LocationResult = suspendCoroutine { coroutine ->
         val locationClient = LocationServices.getFusedLocationProviderClient(contextApplication)
         locationClient.lastLocation.addOnSuccessListener { location: Location? ->
             if (location != null) {
-                coroutine.resume(
-                    LocationResult.Success(
-                        location.latitude,
-                        location.longitude,
-                        getLocationName(location.latitude, location.longitude)
+                try {
+                    coroutine.resume(
+                        LocationResult.Success(
+                            location.latitude,
+                            location.longitude,
+                            getLocationName(location.latitude, location.longitude)
+                        )
                     )
-                )
+                } catch (e: Exception) {
+                    coroutine.resume(LocationResult.Failure(LocationUnknownException()))
+                }
             } else {
                 coroutine.resume(LocationResult.Failure(LocationUnknownException()))
             }
