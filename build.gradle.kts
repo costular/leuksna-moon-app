@@ -13,7 +13,7 @@ buildscript {
         maven("https://maven.fabric.io/public")
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.6.1")
+        classpath("com.android.tools.build:gradle:4.0.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
         classpath("org.koin:koin-gradle-plugin:${Versions.koin}")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}")
