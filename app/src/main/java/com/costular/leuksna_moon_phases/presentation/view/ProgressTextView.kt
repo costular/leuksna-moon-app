@@ -39,7 +39,7 @@ class ProgressTextView @JvmOverloads constructor(
 
     private var progressBackgroundColor: Int = DEFAULT_BACKGROUND_COLOR
 
-    private var textColor: Int = readAttrColor(R.attr.colorOnSurface)
+    private var textColor: Int = readAttrColor(com.google.android.material.R.attr.colorOnSurface)
 
     private var progressWidth: Int = DEFAULT_WIDTH
 
@@ -71,7 +71,7 @@ class ProgressTextView @JvmOverloads constructor(
 
             textColor = getColor(
                 R.styleable.ProgressTextView_pt_textColor,
-                readAttrColor(R.attr.colorOnSurface)
+                readAttrColor(com.google.android.material.R.attr.colorOnSurface)
             )
         }
 
@@ -119,7 +119,7 @@ class ProgressTextView @JvmOverloads constructor(
         invalidate()
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         calculate()
 
@@ -146,24 +146,24 @@ class ProgressTextView @JvmOverloads constructor(
         drawProgress(canvas)
     }
 
-    private fun drawProgressBackground(canvas: Canvas?) {
+    private fun drawProgressBackground(canvas: Canvas) {
         val newRadius = radius / 1.3f
         val oval = RectF(
             center - newRadius, center - newRadius, center + newRadius, center + newRadius
         )
-        canvas?.drawArc(oval, -90f, 360f, false, backgroundPaint)
+        canvas.drawArc(oval, -90f, 360f, false, backgroundPaint)
     }
 
-    private fun drawProgress(canvas: Canvas?) {
+    private fun drawProgress(canvas: Canvas) {
         val newRadius = radius / 1.3f
         val oval = RectF(
             center - newRadius, center - newRadius, center + newRadius, center + newRadius
         )
-        canvas?.drawArc(oval, -90f, 360 * (progress / 100f), false, progressPaint)
+        canvas.drawArc(oval, -90f, 360 * (progress / 100f), false, progressPaint)
     }
 
-    private fun drawText(canvas: Canvas?) {
-        canvas?.drawText(content, center - (textWidth / 2f), center + (textHeight / 2f), textPaint)
+    private fun drawText(canvas: Canvas) {
+        canvas.drawText(content, center - (textWidth / 2f), center + (textHeight / 2f), textPaint)
     }
 
     private fun measureDimension(desiredSize: Int, measureSpec: Int): Int {

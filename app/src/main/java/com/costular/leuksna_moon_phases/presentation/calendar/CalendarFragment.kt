@@ -1,48 +1,36 @@
 package com.costular.leuksna_moon_phases.presentation.calendar
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.navigation.fragment.navArgs
 import com.costular.leuksna_moon_phases.R
+import com.costular.leuksna_moon_phases.databinding.FragmentCalendarBinding
 import com.costular.leuksna_moon_phases.di.calendar
 import com.costular.leuksna_moon_phases.presentation.main.MainViewModel
 import com.costular.leuksna_moon_phases.presentation.view.RoundedBottomSheetFragment
-import com.kizitonwose.calendarview.utils.next
-import com.kizitonwose.calendarview.utils.previous
-import com.kizitonwose.calendarview.utils.yearMonth
-import io.uniflow.android.flow.onStates
-import kotlinx.android.synthetic.main.fragment_calendar.*
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import io.uniflow.android.livedata.onStates
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.threeten.bp.LocalDate
-import org.threeten.bp.YearMonth
-import org.threeten.bp.format.DateTimeFormatter
-import org.threeten.bp.temporal.WeekFields
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.DateTimeFormatter
+import java.time.temporal.WeekFields
 import java.util.Locale
 
-class CalendarFragment : RoundedBottomSheetFragment() {
+class CalendarFragment : RoundedBottomSheetFragment(R.layout.fragment_calendar) {
 
-    val args: CalendarFragmentArgs by navArgs()
+    private var _binding: FragmentCalendarBinding? = null
+    private val binding get() = requireNotNull(_binding)
 
-    private val mainViewModel: MainViewModel by sharedViewModel()
+    private val mainViewModel: MainViewModel by activityViewModel()
     private val calendarViewModel: CalendarViewModel by viewModel()
 
     private val monthFormatter = DateTimeFormatter.ofPattern("MMMM")
 
     private lateinit var selectedDate: LocalDate
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_calendar, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentCalendarBinding.bind(view)
         readArgs()
         bindActions()
         initCalendar()
@@ -57,7 +45,7 @@ class CalendarFragment : RoundedBottomSheetFragment() {
     }
 
     private fun readArgs() {
-        selectedDate = LocalDate.parse(args.selectedDate)
+        selectedDate = LocalDate.parse(requireArguments().getString("selectedDate"))
     }
 
     private fun handleState(state: CalendarState) {
@@ -65,37 +53,38 @@ class CalendarFragment : RoundedBottomSheetFragment() {
     }
 
     private fun bindActions() {
-        buttonPrevMonth.setOnClickListener {
-            calendar.findFirstVisibleMonth()?.let {
-                calendar.smoothScrollToMonth(it.yearMonth.previous)
+        binding.buttonPrevMonth.setOnClickListener {
+            binding.calendar.findFirstVisibleMonth()?.let {
+                binding.calendar.smoothScrollToMonth(it.yearMonth.minusMonths(1))
             }
         }
-        buttonNextMonth.setOnClickListener {
-            calendar.findFirstVisibleMonth()?.let {
-                calendar.smoothScrollToMonth(it.yearMonth.next)
+        binding.buttonNextMonth.setOnClickListener {
+            binding.calendar.findFirstVisibleMonth()?.let {
+                binding.calendar.smoothScrollToMonth(it.yearMonth.plusMonths(1))
             }
         }
-        textHeader.setOnClickListener {
-            calendar.smoothScrollToMonth(YearMonth.now())
+        binding.textHeader.setOnClickListener {
+            binding.calendar.smoothScrollToMonth(YearMonth.now())
         }
     }
 
     private fun initCalendar() {
-        with(calendar) {
+        with(binding.calendar) {
+            dayViewResource = R.layout.item_calendar_day
             dayBinder =
                 CalendarDayBinder(selectedDate, { mainViewModel.getDayProgress(it) }) { date ->
                     mainViewModel.selectDate(date)
                     calendarViewModel.selectDate(date)
                 }
             val current = YearMonth.now()
-            val selectedMonth = selectedDate.yearMonth
+            val selectedMonth = YearMonth.from(selectedDate)
 
             val firstDayOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek
             setup(current.minusMonths(12), current.plusMonths(12), firstDayOfWeek)
             scrollToMonth(selectedMonth)
 
             monthScrollListener = { month ->
-                textHeader.text = "${month.yearMonth.format(monthFormatter)} ${month.year}"
+                binding.textHeader.text = "${month.yearMonth.format(monthFormatter)} ${month.yearMonth.year}"
             }
         }
     }
@@ -104,9 +93,14 @@ class CalendarFragment : RoundedBottomSheetFragment() {
         val oldDate = this.selectedDate
         this.selectedDate = selectedDate
 
-        (calendar.dayBinder as CalendarDayBinder).selectedDate = selectedDate
+        (binding.calendar.dayBinder as CalendarDayBinder).selectedDate = selectedDate
 
-        calendar.notifyDateChanged(oldDate)
-        calendar.notifyDateChanged(selectedDate)
+        binding.calendar.notifyDateChanged(oldDate)
+        binding.calendar.notifyDateChanged(selectedDate)
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }

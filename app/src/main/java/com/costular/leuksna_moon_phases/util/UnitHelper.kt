@@ -18,7 +18,7 @@ object UnitHelper {
     }
 
     fun findMeasureUnit(locale: Locale): MeasureUnit =
-        when (locale.country.toUpperCase()) {
+        when (locale.country.uppercase(Locale.ROOT)) {
             "US", "GB", "MM", "LR" -> MeasureUnit.MI
             else -> MeasureUnit.KM
         }

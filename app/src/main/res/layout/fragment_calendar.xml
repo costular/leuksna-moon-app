@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.kizitonwose.calendarview.CalendarView
+    <com.kizitonwose.calendar.view.CalendarView
         android:id="@+id/calendar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -27,9 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textHeader"
-        app:cv_orientation="horizontal"
-        app:cv_outDateStyle="endOfGrid"
-        app:cv_scrollMode="paged" />
+        app:cv_orientation="horizontal" />
 
     <TextView
         android:id="@+id/textHeader"

@@ -2,7 +2,7 @@ package com.costular.leuksna_moon_phases.domain.usecase
 
 import com.costular.leuksna_moon_phases.domain.MoonRepository
 import com.costular.leuksna_moon_phases.domain.model.MoonInfoRequest
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 
 class GetMoonVisibility(
     private val moonRepository: MoonRepository

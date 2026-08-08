@@ -1,9 +1,9 @@
 package com.costular.leuksna_moon_phases.presentation.settings
 
 import com.costular.leuksna_moon_phases.domain.model.Location
-import com.tfcporciuncula.flow.ObjectPreference
+import com.fredporciuncula.flow.preferences.Serializer
 
-object LocationSerializer : ObjectPreference.Serializer<Location> {
+object LocationSerializer : Serializer<Location> {
 
     override fun deserialize(serialized: String): Location =
         if (serialized.contains("@")) {

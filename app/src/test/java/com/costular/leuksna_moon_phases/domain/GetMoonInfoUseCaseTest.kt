@@ -5,28 +5,28 @@ import com.costular.leuksna_moon_phases.domain.model.MoonPhase
 import com.costular.leuksna_moon_phases.domain.model.Zodiac
 import com.costular.leuksna_moon_phases.domain.usecase.GetMoonInfoUseCase
 import com.costular.leuksna_moon_phases.presentation.CoroutineTest
-import io.kotlintest.TestCase
-import io.kotlintest.shouldBe
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.threeten.bp.LocalDate
-import org.threeten.bp.LocalDateTime
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Test
+import java.time.LocalDate
+import java.time.LocalDateTime
 
-@ExperimentalCoroutinesApi
 class GetMoonInfoUseCaseTest : CoroutineTest() {
 
     lateinit var getMoonInfoUseCase: GetMoonInfoUseCase
 
     private val moonRepository: MoonRepository = mockk(relaxed = true)
 
-    override fun beforeTest(testCase: TestCase) {
-        super.beforeTest(testCase)
+    @Before
+    fun setUp() {
         getMoonInfoUseCase = GetMoonInfoUseCase(moonRepository)
     }
 
-    init {
-        "Given a value from repository when executing the usecase then should return the same value" {
+    @Test
+    fun `returns the repository moon information`() = runTest {
             // Given
             val expected = MoonInfo(
                 LocalDate.now(),
@@ -45,8 +45,6 @@ class GetMoonInfoUseCaseTest : CoroutineTest() {
                 getMoonInfoUseCase.execute(GetMoonInfoUseCase.Params(LocalDate.now(), null, null))
 
             // Then
-            actual.shouldBe(expected)
-        }
+        assertEquals(expected, actual)
     }
-
 }

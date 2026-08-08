@@ -1,6 +1,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_selected="true" android:drawable="@drawable/bg_seleced_date_rounded" />
+    <item android:state_activated="true" android:drawable="@drawable/bg_today_date_rounded" />
     <item android:drawable="@drawable/bg_default" />
 
 </selector>

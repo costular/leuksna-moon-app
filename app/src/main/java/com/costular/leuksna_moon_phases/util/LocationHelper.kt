@@ -49,6 +49,7 @@ class LocationHelperImpl(
     override fun getLocationName(latitude: Double, longitude: Double): String {
         val geocoder = Geocoder(contextApplication, localeHelper.getLocale())
         val address = geocoder.getFromLocation(latitude, longitude, 1)
-        return "${address.first().locality}, ${address.first().countryName}"
+        val resolvedAddress = address?.firstOrNull() ?: throw LocationUnknownException()
+        return "${resolvedAddress.locality}, ${resolvedAddress.countryName}"
     }
 }

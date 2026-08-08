@@ -1,7 +1,7 @@
 package com.costular.leuksna_moon_phases.presentation.calendar
 
-import io.uniflow.android.flow.AndroidDataFlow
-import org.threeten.bp.LocalDate
+import io.uniflow.android.AndroidDataFlow
+import java.time.LocalDate
 
 class CalendarViewModel : AndroidDataFlow(CalendarState()) {
 

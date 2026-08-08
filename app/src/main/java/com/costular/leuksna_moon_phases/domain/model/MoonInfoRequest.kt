@@ -1,6 +1,6 @@
 package com.costular.leuksna_moon_phases.domain.model
 
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 
 data class MoonInfoRequest(
     val date: LocalDate,

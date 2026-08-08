@@ -3,7 +3,7 @@ package com.costular.leuksna_moon_phases.presentation.main
 import android.view.View
 import android.widget.TextView
 import com.costular.leuksna_moon_phases.R
-import com.kizitonwose.calendarview.ui.ViewContainer
+import com.kizitonwose.calendar.view.ViewContainer
 
 class WeekDayView(view: View) : ViewContainer(view) {
 

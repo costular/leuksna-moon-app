@@ -3,8 +3,8 @@ package com.costular.leuksna_moon_phases.data.model
 import com.costular.leuksna_moon_phases.domain.model.MoonPhase
 import com.costular.leuksna_moon_phases.domain.model.Zodiac
 import com.costular.leuksna_moon_phases.util.Radian
-import org.threeten.bp.LocalDate
-import org.threeten.bp.LocalDateTime
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 data class MoonInfoDTO(
     val date: LocalDate,

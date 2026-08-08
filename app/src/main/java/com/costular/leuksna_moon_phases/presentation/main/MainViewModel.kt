@@ -4,12 +4,12 @@ import androidx.lifecycle.viewModelScope
 import com.costular.leuksna_moon_phases.domain.model.Location
 import com.costular.leuksna_moon_phases.domain.model.MoonInfoRequest
 import com.costular.leuksna_moon_phases.presentation.settings.SettingsHelper
-import io.uniflow.android.flow.AndroidDataFlow
+import io.uniflow.android.AndroidDataFlow
 import io.uniflow.core.flow.actionOn
-import io.uniflow.core.flow.getCurrentStateOrNull
+import io.uniflow.core.flow.getStateOrNull
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 
 class MainViewModel(
     private val mainInteractor: MainInteractor,
@@ -17,7 +17,7 @@ class MainViewModel(
 ) : AndroidDataFlow(MainViewState()) {
 
     fun getMoonInfo(
-        localDate: LocalDate = getCurrentStateOrNull<MainViewState>()?.date ?: LocalDate.now()
+        localDate: LocalDate = getStateOrNull<MainViewState>()?.date ?: LocalDate.now()
     ) = actionOn<MainViewState> { state ->
         val location = settingsHelper.getLocation()
         val latitude = if (location is Location.Set) location.latitude else null

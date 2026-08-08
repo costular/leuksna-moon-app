@@ -1,32 +1,30 @@
 package com.costular.leuksna_moon_phases.presentation.calendar
 
-import android.graphics.Color
 import android.view.View
-import com.kizitonwose.calendarview.model.CalendarDay
-import com.kizitonwose.calendarview.model.DayOwner
-import com.kizitonwose.calendarview.ui.DayBinder
-import kotlinx.android.synthetic.main.item_week_day.view.*
-import org.threeten.bp.LocalDate
+import com.kizitonwose.calendar.core.CalendarDay
+import com.kizitonwose.calendar.core.DayPosition
+import com.kizitonwose.calendar.view.MonthDayBinder
+import java.time.LocalDate
 
 class CalendarDayBinder(
     var selectedDate: LocalDate,
     private val progressGetter: (date: LocalDate) -> Int,
     private val listener: (date: LocalDate) -> Unit
-) : DayBinder<CalendarDayView> {
+) : MonthDayBinder<CalendarDayView> {
 
     override fun create(view: View): CalendarDayView = CalendarDayView(view)
 
-    override fun bind(container: CalendarDayView, day: CalendarDay) {
+    override fun bind(container: CalendarDayView, data: CalendarDay) {
         with(container.progressView) {
-            updateContent(day.day.toString())
-            updateProgress(progressGetter(day.date))
+            updateContent(data.date.dayOfMonth.toString())
+            updateProgress(progressGetter(data.date))
 
-            val shouldBeSelected = day.date == selectedDate
+            val shouldBeSelected = data.date == selectedDate
             isSelected = shouldBeSelected
-            isEnabled = day.owner == DayOwner.THIS_MONTH
+            isEnabled = data.position == DayPosition.MonthDate
 
             setOnClickListener {
-                listener(day.date)
+                listener(data.date)
             }
         }
     }

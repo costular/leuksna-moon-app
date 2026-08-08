@@ -1,47 +1,59 @@
 package com.costular.leuksna_moon_phases.presentation.main
 
-import android.content.Context
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.View
-import android.view.WindowManager
+import android.view.animation.LinearInterpolator
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.costular.leuksna_moon_phases.R
+import com.costular.leuksna_moon_phases.databinding.FragmentMainBinding
 import com.costular.leuksna_moon_phases.util.MoonPhaseFormatter
 import com.costular.leuksna_moon_phases.util.ZodiacFormatter
-import io.uniflow.android.flow.onEvents
-import io.uniflow.android.flow.onStates
+import io.uniflow.android.livedata.onEvents
+import io.uniflow.android.livedata.onStates
 import io.uniflow.core.flow.data.UIState
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import java.time.temporal.WeekFields
 import java.util.*
-import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.threeten.bp.LocalDate
-import org.threeten.bp.YearMonth
-import org.threeten.bp.format.DateTimeFormatter
-import org.threeten.bp.format.FormatStyle
-import org.threeten.bp.temporal.WeekFields
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private val mainViewModel: MainViewModel by sharedViewModel()
+    private companion object {
+        const val CALENDAR_CENTER_OFFSET_DAYS = 3L
+        const val MOON_ROTATION_DURATION_MS = 90_000L
+        const val FULL_ROTATION_DEGREES = 360f
+    }
+
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = requireNotNull(_binding)
+
+    private val mainViewModel: MainViewModel by activityViewModel()
     private val moonPhaseFormatter: MoonPhaseFormatter by inject()
     private val zodiacFormatter: ZodiacFormatter by inject()
 
     private var selectedDate: LocalDate = LocalDate.now()
+    private var moonRotationAnimator: ObjectAnimator? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentMainBinding.bind(view)
 
         onStates(mainViewModel) { state ->
             when (state) {
                 is MainViewState -> handleState(state)
-                is UIState.Failed -> handleError(state.error)
+                is UIState.Failed -> handleError(state.error?.origin)
             }
         }
         onEvents(mainViewModel) { event ->
-            when (val data = event.take()) {
+            when (val data = event) {
                 is MainEvents.OpenCalendar -> openCalendar(data.selectedDate)
                 is MainEvents.OpenSettings -> openSettings()
             }
@@ -53,35 +65,54 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun bindActions() {
-        buttonCalendar.setOnClickListener { mainViewModel.openCalendar() }
-        buttonSettings.setOnClickListener { mainViewModel.openSettings() }
-        textCurrentDate.setOnClickListener {
-            horizontalCalendar.scrollToDate(selectedDate.minusDays(2))
+        binding.buttonCalendar.setOnClickListener { mainViewModel.openCalendar() }
+        binding.buttonSettings.setOnClickListener { mainViewModel.openSettings() }
+        binding.textCurrentDate.setOnClickListener {
+            binding.horizontalCalendar.scrollToDate(
+                selectedDate.minusDays(CALENDAR_CENTER_OFFSET_DAYS)
+            )
         }
     }
 
     override fun onStart() {
         super.onStart()
-        viewSky.onStart()
+        binding.viewSky.onStart()
+        startMoonRotation()
     }
 
     override fun onStop() {
-        viewSky.onStop()
+        binding.viewSky.onStop()
+        stopMoonRotation()
         super.onStop()
     }
 
+    private fun startMoonRotation() {
+        if (!ValueAnimator.areAnimatorsEnabled() || moonRotationAnimator != null) return
+
+        moonRotationAnimator = ObjectAnimator.ofFloat(
+            binding.imageMoon,
+            View.ROTATION,
+            binding.imageMoon.rotation,
+            binding.imageMoon.rotation + FULL_ROTATION_DEGREES
+        ).apply {
+            duration = MOON_ROTATION_DURATION_MS
+            interpolator = LinearInterpolator()
+            start()
+        }
+    }
+
+    private fun stopMoonRotation() {
+        moonRotationAnimator?.cancel()
+        moonRotationAnimator = null
+    }
+
     private fun generateCalendar() {
-        val start = YearMonth.now().minusMonths(6)
-        val end = YearMonth.now().plusMonths(6)
+        val start = YearMonth.now().minusMonths(6).atDay(1)
+        val end = YearMonth.now().plusMonths(6).atEndOfMonth()
         val firstDayOfWeek = WeekFields.of(Locale.getDefault()).firstDayOfWeek
 
-        val dm = DisplayMetrics()
-        val wm = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        wm.defaultDisplay.getMetrics(dm)
-
-        with(horizontalCalendar) {
-            dayWidth = dm.widthPixels / 5
-            dayHeight = (horizontalCalendar.dayWidth * 1.25).toInt()
+        with(binding.horizontalCalendar) {
+            dayViewResource = R.layout.item_week_day
             dayBinder = WeekDayBinder(selectedDate, ::onDateSelected)
             setup(start, end, firstDayOfWeek)
         }
@@ -93,49 +124,57 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun handleState(state: MainViewState) = with(state) {
         moonInfo?.let { moonInfo ->
-            textMoonriseTime.text = moonInfo.moonRise.format(
+            binding.textMoonriseTime.text = moonInfo.moonRise.format(
                 DateTimeFormatter.ofLocalizedTime(
                     FormatStyle.SHORT
                 )
             )
 
-            textMoonSetTime.text = moonInfo.moonSet.format(
+            binding.textMoonSetTime.text = moonInfo.moonSet.format(
                 DateTimeFormatter.ofLocalizedTime(
                     FormatStyle.SHORT
                 )
             )
 
-            imageMoon.setImageResource(moonPhaseFormatter.formatDrawableId(moonInfo.moonPhase))
-            textCurrentDate.text =
+            binding.imageMoon.setImageResource(moonPhaseFormatter.formatDrawableId(moonInfo.moonPhase))
+            binding.textCurrentDate.text =
                 date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
-            textMoonPhase.text = moonPhaseFormatter.formatName(moonInfo.moonPhase)
+            binding.textMoonPhase.text = moonPhaseFormatter.formatName(moonInfo.moonPhase)
 
-            keyValueAltitude.value = moonInfo.altitude
-            keyValueDistance.value = moonInfo.distance
-            keyValueZodiac.value = zodiacFormatter.format(moonInfo.zodiac)
-            keyValueLuminosity.value = moonInfo.fraction
+            binding.keyValueAltitude.value = moonInfo.altitude
+            binding.keyValueDistance.value = moonInfo.distance
+            binding.keyValueZodiac.value = zodiacFormatter.format(moonInfo.zodiac)
+            binding.keyValueLuminosity.value = moonInfo.fraction
         }
         val oldDate = selectedDate
         selectedDate = state.date
 
-        horizontalCalendar.smoothScrollToDate(selectedDate.minusDays(2))
+        binding.horizontalCalendar.smoothScrollToDate(
+            selectedDate.minusDays(CALENDAR_CENTER_OFFSET_DAYS)
+        )
 
-        (horizontalCalendar.dayBinder as WeekDayBinder).selectedDate = selectedDate
-        horizontalCalendar.notifyDateChanged(oldDate)
-        horizontalCalendar.notifyDateChanged(selectedDate)
+        (binding.horizontalCalendar.dayBinder as WeekDayBinder).selectedDate = selectedDate
+        binding.horizontalCalendar.notifyDateChanged(oldDate)
+        binding.horizontalCalendar.notifyDateChanged(selectedDate)
     }
 
     private fun handleError(throwable: Throwable?) {
     }
 
     private fun openCalendar(selectedDate: LocalDate) {
-        val action =
-            MainFragmentDirections.actionMainFragmentToCalendarFragment(selectedDate.toString())
-        findNavController().navigate(action)
+        findNavController().navigate(
+            R.id.action_mainFragment_to_calendarFragment,
+            bundleOf("selectedDate" to selectedDate.toString())
+        )
     }
 
     private fun openSettings() {
-        val action = MainFragmentDirections.actionMainFragmentToSettingsFragment()
-        findNavController().navigate(action)
+        findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+    }
+
+    override fun onDestroyView() {
+        stopMoonRotation()
+        _binding = null
+        super.onDestroyView()
     }
 }

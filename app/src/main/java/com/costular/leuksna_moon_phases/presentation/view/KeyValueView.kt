@@ -4,10 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.costular.leuksna_moon_phases.R
+import com.costular.leuksna_moon_phases.databinding.ViewKeyValueBinding
 import com.costular.leuksna_moon_phases.util.readRecycling
 import java.lang.IllegalStateException
 import kotlin.properties.Delegates.observable
-import kotlinx.android.synthetic.main.view_key_value.view.*
 
 class KeyValueView @JvmOverloads constructor(
     context: Context,
@@ -15,16 +15,17 @@ class KeyValueView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyleAttr) {
 
+    private val binding = ViewKeyValueBinding.inflate(android.view.LayoutInflater.from(context), this)
+
     var key: String by observable("") { _, _, newValue ->
-        textKey.text = newValue
+        binding.textKey.text = newValue
     }
 
     var value: String by observable("") { _, _, newValue ->
-        textValue.text = newValue
+        binding.textValue.text = newValue
     }
 
     init {
-        inflate(context, R.layout.view_key_value, this)
         readAttrs(attributeSet)
     }
 

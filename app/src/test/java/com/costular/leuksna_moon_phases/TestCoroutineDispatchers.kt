@@ -2,12 +2,12 @@ package com.costular.leuksna_moon_phases
 
 import io.uniflow.core.dispatcher.UniFlowDispatcherConfiguration
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestDispatcher
 
 class TestCoroutineDispatchers(
-    private val testCoroutineDispatcher: TestCoroutineDispatcher
+    private val testDispatcher: TestDispatcher
 ): UniFlowDispatcherConfiguration {
-    override fun default(): CoroutineDispatcher = testCoroutineDispatcher
-    override fun io(): CoroutineDispatcher = testCoroutineDispatcher
-    override fun main(): CoroutineDispatcher = testCoroutineDispatcher
+    override fun default(): CoroutineDispatcher = testDispatcher
+    override fun io(): CoroutineDispatcher = testDispatcher
+    override fun main(): CoroutineDispatcher = testDispatcher
 }

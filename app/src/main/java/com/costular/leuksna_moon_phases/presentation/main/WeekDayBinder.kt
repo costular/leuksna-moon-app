@@ -1,28 +1,29 @@
 package com.costular.leuksna_moon_phases.presentation.main
 
 import android.view.View
-import com.kizitonwose.calendarview.model.CalendarDay
-import com.kizitonwose.calendarview.ui.DayBinder
-import org.threeten.bp.LocalDate
-import org.threeten.bp.format.DateTimeFormatter
+import com.kizitonwose.calendar.core.WeekDay
+import com.kizitonwose.calendar.view.WeekDayBinder as CalendarWeekDayBinder
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 typealias OnDateSelected = (newDate: LocalDate) -> Unit
 
 class WeekDayBinder(
     var selectedDate: LocalDate,
     private val onDateSelected: OnDateSelected
-) : DayBinder<WeekDayView> {
+) : CalendarWeekDayBinder<WeekDayView> {
 
     private val dayFormatter = DateTimeFormatter.ofPattern("dd")
     private val monthFormatter = DateTimeFormatter.ofPattern("MMM")
 
-    override fun bind(container: WeekDayView, day: CalendarDay) = with(container) {
-        textDay.text = dayFormatter.format(day.date)
-        textMonth.text = monthFormatter.format(day.date)
+    override fun bind(container: WeekDayView, data: WeekDay) = with(container) {
+        textDay.text = dayFormatter.format(data.date)
+        textMonth.text = monthFormatter.format(data.date)
 
-        view.isSelected = selectedDate == day.date
+        view.isSelected = selectedDate == data.date
+        view.isActivated = LocalDate.now() == data.date
         view.setOnClickListener {
-            onDateSelected(day.date)
+            onDateSelected(data.date)
         }
     }
 

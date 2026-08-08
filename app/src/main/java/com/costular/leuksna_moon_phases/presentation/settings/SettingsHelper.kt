@@ -5,7 +5,7 @@ import com.costular.leuksna_moon_phases.domain.model.Location
 import com.costular.leuksna_moon_phases.domain.model.MeasureUnit
 import com.costular.leuksna_moon_phases.util.LocaleHelper
 import com.costular.leuksna_moon_phases.util.UnitHelper
-import com.tfcporciuncula.flow.FlowSharedPreferences
+import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import kotlinx.coroutines.flow.Flow
 
 interface SettingsHelper {

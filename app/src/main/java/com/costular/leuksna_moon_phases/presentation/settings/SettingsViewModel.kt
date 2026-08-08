@@ -6,7 +6,7 @@ import com.costular.leuksna_moon_phases.domain.model.LocationResult
 import com.costular.leuksna_moon_phases.domain.model.MeasureUnit
 import com.costular.leuksna_moon_phases.util.LocationHelper
 import com.costular.leuksna_moon_phases.util.StringsHelper
-import io.uniflow.android.flow.AndroidDataFlow
+import io.uniflow.android.AndroidDataFlow
 import kotlinx.coroutines.flow.onEach
 
 class SettingsViewModel(

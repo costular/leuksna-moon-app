@@ -1,7 +1,7 @@
 package com.costular.leuksna_moon_phases.presentation.main
 
 import io.uniflow.core.flow.data.UIEvent
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 
 sealed class MainEvents : UIEvent() {
 
