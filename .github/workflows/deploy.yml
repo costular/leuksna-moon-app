@@ -1,16 +1,16 @@
-name: Deploy Workflow
+name: Release
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - "*"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  deploy:
-    name: Deploy
+  release:
+    name: Release
 
     runs-on: ubuntu-latest
 
@@ -40,8 +40,22 @@ jobs:
           SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT_JSON }}
         run: printf '%s' "$SERVICE_ACCOUNT" > app/service-account-key.json
 
-      - name: Publish APK
+      - name: Publish to Google Play
         env:
           ANDROID_KEYSTORE_ALIAS: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
           ANDROID_KEYSTORE_PASSPHRASE: ${{ secrets.ANDROID_KEYSTORE_PASSPHRASE }}
         run: ./gradlew publishReleaseBundle --no-daemon
+
+      - name: Build release APK
+        env:
+          ANDROID_KEYSTORE_ALIAS: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
+          ANDROID_KEYSTORE_PASSPHRASE: ${{ secrets.ANDROID_KEYSTORE_PASSPHRASE }}
+        run: ./gradlew assembleRelease --no-daemon
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            app/build/outputs/bundle/release/app-release.aab
+            app/build/outputs/apk/release/app-release.apk
