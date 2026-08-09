@@ -9,30 +9,28 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: pull-request-${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
 
-  unitTest:
-    name: Run unit tests
+  verify:
+    name: Android verification
+    uses: ./.github/workflows/verify.yml
+    permissions:
+      contents: read
+
+  dependency-review:
+    name: Dependency review
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone Repo
+      - name: Clone repo
         uses: actions/checkout@v5
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v5
+      - name: Review new dependencies
+        uses: actions/dependency-review-action@v5
         with:
-          distribution: temurin
-          java-version: '21'
-          cache: gradle
-
-      - name: Decode google-services.json
-        env:
-          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
-        run: printf '%s' "$FIREBASE_CONFIG" > app/google-services.json
-
-      - name: Run Android linter
-        run: ./gradlew lintDebug --no-daemon
-
-      - name: Run unit tests
-        run: ./gradlew testDebugUnitTest --no-daemon
+          fail-on-severity: high
+          license-check: false

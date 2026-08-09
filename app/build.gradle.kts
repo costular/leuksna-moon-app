@@ -1,5 +1,5 @@
-import com.github.triplet.gradle.play.PlayPublisherExtension
 import com.github.triplet.gradle.androidpublisher.ResolutionStrategy
+import com.github.triplet.gradle.play.PlayPublisherExtension
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 plugins {
@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.ktlint)
-    alias(libs.plugins.play.publisher)
+    alias(libs.plugins.play.publisher) apply false
     alias(libs.plugins.versions)
 }
 
@@ -45,15 +45,20 @@ android {
     }
 }
 
-configure<PlayPublisherExtension> {
-    serviceAccountCredentials.set(file("service-account-key.json"))
-    defaultToAppBundles.set(true)
-    track.set("production")
-    resolutionStrategy.set(ResolutionStrategy.AUTO)
+if (file("service-account-key.json").isFile) {
+    apply(plugin = "com.github.triplet.play")
+
+    configure<PlayPublisherExtension> {
+        serviceAccountCredentials.set(file("service-account-key.json"))
+        defaultToAppBundles.set(true)
+        track.set("production")
+        resolutionStrategy.set(ResolutionStrategy.AUTO)
+    }
 }
 
 configure<KtlintExtension> {
     version.set("1.8.0")
+    baseline.set(file("ktlint-baseline.xml"))
 }
 
 dependencies {

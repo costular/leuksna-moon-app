@@ -9,8 +9,17 @@ permissions:
   contents: write
 
 jobs:
+  verify:
+    name: Android verification
+    uses: ./.github/workflows/verify.yml
+    with:
+      run-instrumentation: true
+    permissions:
+      contents: read
+
   release:
     name: Release
+    needs: verify
 
     runs-on: ubuntu-latest
 
