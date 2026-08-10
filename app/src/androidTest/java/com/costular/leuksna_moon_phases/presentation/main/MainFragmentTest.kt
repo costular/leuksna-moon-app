@@ -5,6 +5,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import com.costular.leuksna_moon_phases.R
 import com.costular.leuksna_moon_phases.presentation.BaseCase
 import org.junit.Assert
@@ -13,15 +14,12 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class MainFragmentTest : BaseCase() {
-
     @Test
     fun test() =
         run {
             step("Open settings") {
                 // Given
-                val navController = TestNavHostController(
-                    ApplicationProvider.getApplicationContext())
-                navController.setGraph(R.navigation.nav_graph)
+                val navController = createNavController()
 
                 launchFragmentInContainer<MainFragment>(themeResId = R.style.AppTheme).onFragment { fragment ->
                     Navigation.setViewNavController(fragment.requireView(), navController)
@@ -40,9 +38,7 @@ class MainFragmentTest : BaseCase() {
 
             step("Open calendar bottom sheet") {
                 // Given
-                val navController = TestNavHostController(
-                    ApplicationProvider.getApplicationContext())
-                navController.setGraph(R.navigation.nav_graph)
+                val navController = createNavController()
 
                 launchFragmentInContainer<MainFragment>(themeResId = R.style.AppTheme).onFragment { fragment ->
                     Navigation.setViewNavController(fragment.requireView(), navController)
@@ -59,4 +55,16 @@ class MainFragmentTest : BaseCase() {
                 Assert.assertEquals(R.id.calendarFragment, navController.currentDestination?.id)
             }
         }
+
+    private fun createNavController(): TestNavHostController {
+        lateinit var navController: TestNavHostController
+        InstrumentationRegistry.getInstrumentation().runOnMainSync {
+            navController =
+                TestNavHostController(
+                    ApplicationProvider.getApplicationContext(),
+                )
+            navController.setGraph(R.navigation.nav_graph)
+        }
+        return navController
+    }
 }

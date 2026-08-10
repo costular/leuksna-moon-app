@@ -1,8 +1,8 @@
 package com.costular.leuksna_moon_phases.presentation.main
 
-import com.agoda.kakao.common.views.KView
 import com.costular.leuksna_moon_phases.R
 import com.kaspersky.kaspresso.screens.KScreen
+import io.github.kakaocup.kakao.common.views.KView
 
 object MainScreen : KScreen<MainScreen>() {
 

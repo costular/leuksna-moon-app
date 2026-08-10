@@ -85,7 +85,9 @@ dependencies {
     testImplementation(libs.coroutines.test)
     testImplementation(libs.mockk)
 
-    debugImplementation(libs.androidx.fragment.testing)
+    debugImplementation(libs.androidx.fragment.testing) {
+        exclude(group = "androidx.test", module = "core")
+    }
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
